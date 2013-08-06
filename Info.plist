@@ -28,5 +28,9 @@
 	<array>
 		<string>openemu.system.snes</string>
 	</array>
+	<key>SUEnableAutomaticChecks</key>
+	<string>1</string>
+	<key>SUFeedURL</key>
+	<string>http://openemu.org/updater/higan_appcast.xml</string>
 </dict>
 </plist>

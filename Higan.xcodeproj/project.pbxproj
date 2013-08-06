@@ -22,6 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		8C9C9F0B17B1BEA1005A128E /* ipl.rom in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8D1C617A9445700BC796A /* ipl.rom */; };
+		8C9C9F0C17B1C0CF005A128E /* manifest.bml in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8D1C717A9445700BC796A /* manifest.bml */; };
 		8CA9071F17A84F72001591B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA9071E17A84F72001591B7 /* Cocoa.framework */; };
 		8CA9072917A84F72001591B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8CA9072717A84F72001591B7 /* InfoPlist.strings */; };
 		8CB8851417AA7899001E5AD3 /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D1F617A9445700BC796A /* cpu.cpp */; };
@@ -3999,6 +4001,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA9072917A84F72001591B7 /* InfoPlist.strings in Resources */,
+				8C9C9F0B17B1BEA1005A128E /* ipl.rom in Resources */,
+				8C9C9F0C17B1C0CF005A128E /* manifest.bml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4119,11 +4123,7 @@
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/higan\"";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = (
-					"-DPROFILE_PERFORMANCE",
-					"-march=native",
-					"-fomit-frame-pointer",
-				);
+				OTHER_CFLAGS = "-DPROFILE_PERFORMANCE";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -4136,6 +4136,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;

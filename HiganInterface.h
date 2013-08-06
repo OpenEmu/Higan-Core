@@ -25,11 +25,10 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #import "HiganGameCore.h"
+#import "OESNESSystemResponderClient.h"
 
 #include <phoenix/cocoa/header.hpp>
 #include <emulator/emulator.hpp>
-
-#undef noinline
 
 struct Interface : Emulator::Interface::Bind {
     void loadRequest(unsigned id, string name, string type);
@@ -45,6 +44,6 @@ struct Interface : Emulator::Interface::Bind {
     void notify(string text);
 
     HiganGameCore *core;
+    Emulator::Interface *emulator;
+    BOOL inputState[2][OESNESButtonCount] = { 0 };
 };
-
-extern Interface* interface;

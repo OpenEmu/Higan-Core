@@ -26,7 +26,6 @@
  */
 
 #import "HiganInterface.h"
-
 #import <OpenEmuBase/OERingBuffer.h>
 
 #include "ananke/heuristics/super-famicom.hpp"
@@ -48,22 +47,28 @@ void Interface::loadRequest(unsigned id, string path)
     if(id == SuperFamicom::ID::Manifest)
     {
         NSData *rom = [NSData dataWithContentsOfFile:[[core romPath] stringByStandardizingPath]];
-        //SuperFamicomCartridge cartridge([rom bytes], [rom length]);
+        
         string markup = SuperFamicomCartridge((const uint8_t *)[rom bytes], [rom length]).markup;
         memorystream stream((const uint8_t *)markup.data(), markup.size());
-        core.emulator->load(id, stream);
+        emulator->load(id, stream);
 
+        NSLog(@"Higan: Loaded manifest");
     }
     else if(id == SuperFamicom::ID::IPLROM)
     {
-        mmapstream stream("/Users/danielnagel/Downloads/emulator/higan_v092-source/higan/profile/Super Famicom.sys/ipl.rom");
-        core.emulator->load(id, stream);
+        NSString *resourcePath = [[[core owner] bundle] resourcePath];
+        mmapstream stream([[resourcePath stringByAppendingPathComponent:@(path.data())] UTF8String]);
+        emulator->load(id, stream);
+
+        NSLog(@"Higan: Loaded IPLROM");
 
     }
     else if(id == SuperFamicom::ID::ROM)
     {
         mmapstream stream([[core romPath] UTF8String]);
-        core.emulator->load(id, stream);
+        emulator->load(id, stream);
+
+        NSLog(@"Higan: Loaded rom");
     }
     else
     {
@@ -78,31 +83,33 @@ void Interface::saveRequest(unsigned id, string path)
 
 uint32_t Interface::videoColor(unsigned source, uint16_t r, uint16_t g, uint16_t b)
 {
-    NSLog(@"videoColor(unsigned source, uint16_t r, uint16_t g, uint16_t b) not implemented");
+    r >>= 8, g >>= 8, b >>= 8;
+    return r << 16 | g << 8 | b << 0;
 }
 
 void Interface::videoRefresh(const uint32_t* data, unsigned pitch, unsigned width, unsigned height)
 {
+    pitch >>= 2;
+/*
+    // Remove overscan
+    data += 8 * pitch;
+    if(height == 240)
+        height = 224;
+    else if(height == 480)
+        height = 448;
+*/
     core.width  = width;
     core.height = height;
-
-    pitch >>= 2;
-    
-    //for(unsigned y = 0; y < height; y++) {
-    //    memcpy(core.buffer + y * 512, data + y * pitch, 4 * width);
-    //}
-
 
     dispatch_queue_t the_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 
     dispatch_apply(height, the_queue, ^(size_t y)
     {
-        const uint32_t *src = (uint32_t*)data + y * pitch; //pitch is in bytes not pixels
+        const uint32_t *src = (uint32_t*)data + y * pitch;
         uint32_t *dst = core.buffer + y * 512;
 
         memcpy(dst, src, sizeof(uint32_t)*width);
     });
- 
 }
 
 void Interface::audioSample(int16_t lsample, int16_t rsample)
@@ -111,9 +118,11 @@ void Interface::audioSample(int16_t lsample, int16_t rsample)
     [[core ringBufferAtIndex:0] write:&rsample maxLength:2];
 }
 
+static const int inputMap [] = { OESNESButtonB, OESNESButtonY, OESNESButtonSelect, OESNESButtonStart, OESNESButtonUp, OESNESButtonDown, OESNESButtonLeft, OESNESButtonRight, OESNESButtonA, OESNESButtonX, OESNESButtonTriggerLeft, OESNESButtonTriggerRight };
+
 int16_t Interface::inputPoll(unsigned port, unsigned device, unsigned input)
 {
-    return 0;
+    return inputState[port][inputMap[input]];
 }
 
 unsigned Interface::dipSettings(const Markup::Node& node)
@@ -123,7 +132,8 @@ unsigned Interface::dipSettings(const Markup::Node& node)
 
 string Interface::path(unsigned group)
 {
-    return "";
+    NSString *resourcePath = [[[core owner] bundle] resourcePath];
+    return [[resourcePath stringByAppendingString:@"/"] UTF8String];
 }
 
 string Interface::server()

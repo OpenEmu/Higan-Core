@@ -26,17 +26,16 @@
  */
 
 #import "HiganGameCore.h"
-#import "OESNESSystemResponderClient.h"
 #import "HiganInterface.h"
+#import "OESNESSystemResponderClient.h"
 
 #include <sfc/interface/interface.hpp>
-#include <nall/stream/mmap.hpp>
 
 @interface HiganGameCore () <OESNESSystemResponderClient>
 {
     Interface *_interface;
+    Emulator::Interface *_emulator;
 }
-
 @end
 
 @implementation HiganGameCore
@@ -48,9 +47,6 @@
     if(self != nil)
     {
         _buffer = new uint32_t[512 * 480];
-        //_buffer = (uint32_t *)malloc(512 * 480 * sizeof(uint32_t));
-        
-        //current = self;
     }
 
     return self;
@@ -62,23 +58,25 @@
     delete _interface;
 }
 
+#pragma mark - Execution
+
 - (BOOL)loadFileAtPath:(NSString *)path
 {
     _romPath = [path copy];
 
+    NSLog(@"Higan: Loading game");
+
     _interface = new Interface;
     _emulator  = new SuperFamicom::Interface;
+    
     _interface->core = self;
+    _interface->emulator = _emulator;
 
     _emulator->bind = _interface;
-    //_interface->audioCallback = audioCallback;
-
-
-    //mmapstream stream([path UTF8String]);
-
-    //_emulator->load(SuperFamicom::ID::ROM, stream);
     _emulator->load(SuperFamicom::ID::SuperFamicom);
+
     _emulator->power();
+    _emulator->paletteUpdate();
 
     _emulator->run();
 
@@ -98,6 +96,13 @@
 - (void)resetEmulation
 {
     _emulator->reset();
+}
+
+#pragma mark - Video
+
+- (OEIntSize)aspectSize
+{
+    return OEIntSizeMake(8, 7);
 }
 
 - (OEIntRect)screenRect
@@ -127,13 +132,15 @@
 
 - (GLenum)internalPixelFormat
 {
-    return GL_RGBA;
+    return GL_RGB8;
 }
 
 - (NSTimeInterval)frameInterval
 {
     return _emulator->videoFrequency();
 }
+
+#pragma mark - Audio
 
 - (NSUInteger)channelCount
 {
@@ -145,14 +152,45 @@
     return _emulator->audioFrequency();
 }
 
+#pragma mark - Save State
+
+- (BOOL)saveStateToFileAtPath:(NSString *)fileName
+{
+    serializer state = _emulator->serialize();
+
+    FILE  *saveStateFile = fopen([fileName UTF8String], "wb");
+    size_t bytesWritten  = fwrite(state.data(), sizeof(uint8_t), state.size(), saveStateFile);
+
+    if(bytesWritten != state.size())
+    {
+        NSLog(@"Couldn't write save state");
+        return NO;
+    }
+
+    fclose(saveStateFile);
+    return YES;
+}
+
+- (BOOL)loadStateFromFileAtPath:(NSString *)fileName
+{
+    NSData *state = [NSData dataWithContentsOfFile:fileName];
+    serializer stateToLoad((const uint8_t *)[state bytes], [state length]);
+
+    _emulator->unserialize(stateToLoad);
+
+    return YES;
+}
+
+#pragma mark - Input
+
 - (oneway void)didPushSNESButton:(OESNESButton)button forPlayer:(NSUInteger)player
 {
-
+    _interface->inputState[player - 1][button] = 1;
 }
 
 - (oneway void)didReleaseSNESButton:(OESNESButton)button forPlayer:(NSUInteger)player
 {
-    
+    _interface->inputState[player - 1][button] = 0;
 }
 
 @end

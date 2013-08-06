@@ -34,7 +34,6 @@ OE_EXPORTED_CLASS
 @interface HiganGameCore : OEGameCore
 
 @property(readonly) NSString *romPath;
-@property(readonly) Emulator::Interface *emulator;
 
 @property NSUInteger width;
 @property NSUInteger height;
