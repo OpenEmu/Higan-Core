@@ -64,6 +64,8 @@
 {
     _romPath = [path copy];
 
+    NSString *supportDirectory = [[self supportDirectoryPath] stringByAppendingPathComponent:[path lastPathComponent]];
+
     NSLog(@"Higan: Loading game");
 
     _interface = new Interface;
@@ -71,9 +73,26 @@
     
     _interface->core = self;
     _interface->emulator = _emulator;
+    
+    _interface->paths.append([[[[self owner] bundle] resourcePath] UTF8String]);
+    _interface->resourcePath = &_interface->paths(0);
 
+    _interface->paths.append([[self biosDirectoryPath] UTF8String]);
+    _interface->biosPath     = &_interface->paths(1);
+
+    _interface->paths.append([supportDirectory UTF8String]);
+    _interface->supportPath  = &_interface->paths(2);
+
+    for(auto& path : _interface->paths) path.append("/");
+    
     _emulator->bind = _interface;
     _emulator->load(SuperFamicom::ID::SuperFamicom);
+
+    if(!_emulator->loaded())
+    {
+        NSLog(@"Higan: ROM did not load correctly");
+        return NO;
+    }
 
     _emulator->power();
     _emulator->paletteUpdate();
@@ -96,6 +115,13 @@
 - (void)resetEmulation
 {
     _emulator->reset();
+}
+
+- (void)stopEmulation
+{
+    _emulator->save();
+
+    [super stopEmulation];
 }
 
 #pragma mark - Video

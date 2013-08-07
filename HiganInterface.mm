@@ -30,8 +30,7 @@
 
 #include "ananke/heuristics/super-famicom.hpp"
 
-#include <nall/stream/memory.hpp>
-#include <nall/stream/mmap.hpp>
+#include <nall/stream.hpp>
 
 #include <sfc/interface/interface.hpp>
 
@@ -42,43 +41,41 @@ void Interface::loadRequest(unsigned id, string name, string type)
 
 void Interface::loadRequest(unsigned id, string path)
 {
-    NSLog(@"ID: %d, Path: %s", id, path.data());
+    NSLog(@"Loading file \"%s\"", path.data());
 
-    if(id == SuperFamicom::ID::Manifest)
+    if(path.equals("manifest.bml"))
     {
         NSData *rom = [NSData dataWithContentsOfFile:[[core romPath] stringByStandardizingPath]];
         
         string markup = SuperFamicomCartridge((const uint8_t *)[rom bytes], [rom length]).markup;
         memorystream stream((const uint8_t *)markup.data(), markup.size());
-        emulator->load(id, stream);
-
-        NSLog(@"Higan: Loaded manifest");
+        return emulator->load(id, stream);
     }
-    else if(id == SuperFamicom::ID::IPLROM)
-    {
-        NSString *resourcePath = [[[core owner] bundle] resourcePath];
-        mmapstream stream([[resourcePath stringByAppendingPathComponent:@(path.data())] UTF8String]);
-        emulator->load(id, stream);
-
-        NSLog(@"Higan: Loaded IPLROM");
-
-    }
-    else if(id == SuperFamicom::ID::ROM)
+    else if(path.equals("program.rom"))
     {
         mmapstream stream([[core romPath] UTF8String]);
-        emulator->load(id, stream);
+        return emulator->load(id, stream);
+    }
 
-        NSLog(@"Higan: Loaded rom");
-    }
-    else
+    for(auto& prefix : paths)
     {
-        NSLog(@"Reached end %s", path.data());
+        string filePath = {prefix, path};
+        if(file::exists(filePath))
+        {
+            mmapstream stream(filePath);
+            return emulator->load(id, stream);
+        }
     }
+
+    NSLog(@"Higan: Wasn't able to load file \"%s\"", path.data());
 }
 
 void Interface::saveRequest(unsigned id, string path)
 {
-    NSLog(@"saveRequest(unsigned id, string path) not implemented");
+    directory::create(*supportPath);
+    string pathname = {*supportPath, path};
+    filestream stream(pathname, file::mode::write);
+    return emulator->save(id, stream);
 }
 
 uint32_t Interface::videoColor(unsigned source, uint16_t r, uint16_t g, uint16_t b)
@@ -132,8 +129,10 @@ unsigned Interface::dipSettings(const Markup::Node& node)
 
 string Interface::path(unsigned group)
 {
-    NSString *resourcePath = [[[core owner] bundle] resourcePath];
-    return [[resourcePath stringByAppendingString:@"/"] UTF8String];
+    if(group == 0)
+        return *resourcePath;
+    else
+        return *supportPath;
 }
 
 string Interface::server()

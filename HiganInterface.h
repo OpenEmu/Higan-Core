@@ -45,5 +45,9 @@ struct Interface : Emulator::Interface::Bind {
 
     HiganGameCore *core;
     Emulator::Interface *emulator;
+    lstring paths;
+    string *resourcePath;
+    string *biosPath;
+    string *supportPath;
     BOOL inputState[2][OESNESButtonCount] = { 0 };
 };
