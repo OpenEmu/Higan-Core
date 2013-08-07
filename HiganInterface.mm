@@ -72,8 +72,8 @@ void Interface::loadRequest(unsigned id, string path)
 
 void Interface::saveRequest(unsigned id, string path)
 {
-    directory::create(*supportPath);
-    string pathname = {*supportPath, path};
+    directory::create(paths(2));
+    string pathname = {paths(2), path};
     filestream stream(pathname, file::mode::write);
     return emulator->save(id, stream);
 }
@@ -115,11 +115,9 @@ void Interface::audioSample(int16_t lsample, int16_t rsample)
     [[core ringBufferAtIndex:0] write:&rsample maxLength:2];
 }
 
-static const int inputMap [] = { OESNESButtonB, OESNESButtonY, OESNESButtonSelect, OESNESButtonStart, OESNESButtonUp, OESNESButtonDown, OESNESButtonLeft, OESNESButtonRight, OESNESButtonA, OESNESButtonX, OESNESButtonTriggerLeft, OESNESButtonTriggerRight };
-
 int16_t Interface::inputPoll(unsigned port, unsigned device, unsigned input)
 {
-    return inputState[port][inputMap[input]];
+    return inputState[port][input];
 }
 
 unsigned Interface::dipSettings(const Markup::Node& node)
@@ -130,9 +128,11 @@ unsigned Interface::dipSettings(const Markup::Node& node)
 string Interface::path(unsigned group)
 {
     if(group == 0)
-        return *resourcePath;
+        // resource path
+        return paths(0);
     else
-        return *supportPath;
+        // support path
+        return paths(2);
 }
 
 string Interface::server()

@@ -28,14 +28,25 @@
 #import "HiganGameCore.h"
 #import "HiganInterface.h"
 #import "OESNESSystemResponderClient.h"
+#import "OEGBASystemResponderClient.h"
 
 #include <sfc/interface/interface.hpp>
+#include <gba/interface/interface.hpp>
 
-@interface HiganGameCore () <OESNESSystemResponderClient>
+typedef enum OERunningSystem : NSUInteger
+{
+    OESuperFamicomSystem,
+    OEGameBoyAdvanceSystem,
+    OESystemCount,
+    OESystemUnknown = NSNotFound,
+} OERunningSystem;
+
+@interface HiganGameCore () <OESNESSystemResponderClient, OEGBASystemResponderClient>
 {
     Interface *_interface;
     Emulator::Interface *_emulator;
 }
+@property OERunningSystem runningSystem;
 @end
 
 @implementation HiganGameCore
@@ -64,29 +75,46 @@
 {
     _romPath = [path copy];
 
-    NSString *supportDirectory = [[self supportDirectoryPath] stringByAppendingPathComponent:[path lastPathComponent]];
+    NSString *suffix;
+    unsigned id;
+
+    if([[self systemIdentifier] isEqualToString:@"openemu.system.snes"])
+    {
+        suffix = @"Super Famicom.sys";
+        _emulator  = new SuperFamicom::Interface;
+        id = SuperFamicom::ID::ROM;
+        _runningSystem = OESuperFamicomSystem;
+    }
+    else if([[self systemIdentifier] isEqualToString:@"openemu.system.gba"])
+    {
+        suffix = @"Game Boy Advance.sys";
+        _emulator  = new GameBoyAdvance::Interface;
+        id = GameBoyAdvance::ID::ROM;
+        _runningSystem = OEGameBoyAdvanceSystem;
+    }
+    else
+    {
+        return NO;
+    }
+    
+    NSString *resourceDirectory = [[[[self owner] bundle] resourcePath] stringByAppendingPathComponent:suffix];
+    NSString *supportDirectory = [[self supportDirectoryPath] stringByAppendingFormat:@"/%@/%@", suffix, [path lastPathComponent]];
 
     NSLog(@"Higan: Loading game");
 
     _interface = new Interface;
-    _emulator  = new SuperFamicom::Interface;
     
     _interface->core = self;
     _interface->emulator = _emulator;
     
-    _interface->paths.append([[[[self owner] bundle] resourcePath] UTF8String]);
-    _interface->resourcePath = &_interface->paths(0);
-
+    _interface->paths.append([resourceDirectory UTF8String]);
     _interface->paths.append([[self biosDirectoryPath] UTF8String]);
-    _interface->biosPath     = &_interface->paths(1);
-
     _interface->paths.append([supportDirectory UTF8String]);
-    _interface->supportPath  = &_interface->paths(2);
 
     for(auto& path : _interface->paths) path.append("/");
-    
+
     _emulator->bind = _interface;
-    _emulator->load(SuperFamicom::ID::SuperFamicom);
+    _emulator->load(id);
 
     if(!_emulator->loaded())
     {
@@ -128,7 +156,10 @@
 
 - (OEIntSize)aspectSize
 {
-    return OEIntSizeMake(8, 7);
+    if(_runningSystem == OESuperFamicomSystem)
+        return OEIntSizeMake(8, 7);
+    else
+        return OEIntSizeMake(3, 2);
 }
 
 - (OEIntRect)screenRect
@@ -209,14 +240,28 @@
 
 #pragma mark - Input
 
+static const int inputMapSuperFamicom [] = {4, 5, 6, 7, 8, 0, 9, 1,10, 11, 3, 2};
+
 - (oneway void)didPushSNESButton:(OESNESButton)button forPlayer:(NSUInteger)player
 {
-    _interface->inputState[player - 1][button] = 1;
+    _interface->inputState[player - 1][inputMapSuperFamicom[button]] = 1;
 }
 
 - (oneway void)didReleaseSNESButton:(OESNESButton)button forPlayer:(NSUInteger)player
 {
-    _interface->inputState[player - 1][button] = 0;
+    _interface->inputState[player - 1][inputMapSuperFamicom[button]] = 0;
+}
+
+static const int inputMapGameBoyAdvance [] = {6, 7, 5, 4, 0, 1, 9, 8, 3, 2};
+
+- (oneway void)didPushGBAButton:(OEGBAButton)button forPlayer:(NSUInteger)player
+{
+    _interface->inputState[player - 1][inputMapGameBoyAdvance[button]] = 1;
+}
+
+- (oneway void)didReleaseGBAButton:(OEGBAButton)button forPlayer:(NSUInteger)player
+{
+    _interface->inputState[player - 1][inputMapGameBoyAdvance[button]] = 0;
 }
 
 @end

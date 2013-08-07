@@ -22,10 +22,19 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		8C9C9F0B17B1BEA1005A128E /* ipl.rom in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8D1C617A9445700BC796A /* ipl.rom */; };
-		8C9C9F0C17B1C0CF005A128E /* manifest.bml in Resources */ = {isa = PBXBuildFile; fileRef = 8CC8D1C717A9445700BC796A /* manifest.bml */; };
 		8CA9071F17A84F72001591B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA9071E17A84F72001591B7 /* Cocoa.framework */; };
 		8CA9072917A84F72001591B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8CA9072717A84F72001591B7 /* InfoPlist.strings */; };
+		8CB7C5D117B2760600B3117C /* Super Famicom.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5D017B2760200B3117C /* Super Famicom.sys */; };
+		8CB7C5D217B2760900B3117C /* Game Boy Advance.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CD17B2760200B3117C /* Game Boy Advance.sys */; };
+		8CB7C5D317B27CB700B3117C /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF9F17A9445600BC796A /* system.cpp */; };
+		8CB7C5D417B27CBB00B3117C /* scheduler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF9A17A9445600BC796A /* scheduler.cpp */; };
+		8CB7C5D517B27CC100B3117C /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF9217A9445600BC796A /* ppu.cpp */; };
+		8CB7C5D617B27CC700B3117C /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF8817A9445600BC796A /* memory.cpp */; };
+		8CB7C5D717B27CCC00B3117C /* interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF8417A9445600BC796A /* interface.cpp */; };
+		8CB7C5D817B27CD000B3117C /* video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CFA217A9445600BC796A /* video.cpp */; };
+		8CB7C5D917B27CD700B3117C /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF7817A9445600BC796A /* cpu.cpp */; };
+		8CB7C5DA17B27CDD00B3117C /* cartridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF7117A9445600BC796A /* cartridge.cpp */; };
+		8CB7C5DB17B27CE200B3117C /* apu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF6317A9445600BC796A /* apu.cpp */; };
 		8CB8851417AA7899001E5AD3 /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D1F617A9445700BC796A /* cpu.cpp */; };
 		8CB8851617AA78A8001E5AD3 /* smp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D24917A9445700BC796A /* smp.cpp */; };
 		8CB8851717AA78BE001E5AD3 /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D22617A9445700BC796A /* ppu.cpp */; };
@@ -97,6 +106,12 @@
 		8CA9072317A84F72001591B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8CA9072617A84F72001591B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8CA9072817A84F72001591B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = OEGBASystemResponderClient.h; path = "../OpenEmu/GameBoy Advance/OEGBASystemResponderClient.h"; sourceTree = "<group>"; };
+		8CB7C5CC17B2760200B3117C /* Famicom.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Famicom.sys; sourceTree = "<group>"; };
+		8CB7C5CD17B2760200B3117C /* Game Boy Advance.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy Advance.sys"; sourceTree = "<group>"; };
+		8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy Color.sys"; sourceTree = "<group>"; };
+		8CB7C5CF17B2760200B3117C /* Game Boy.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy.sys"; sourceTree = "<group>"; };
+		8CB7C5D017B2760200B3117C /* Super Famicom.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Super Famicom.sys"; sourceTree = "<group>"; };
 		8CC8CE8517A9445600BC796A /* ananke.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ananke.cpp; sourceTree = "<group>"; };
 		8CC8CE8617A9445600BC796A /* archive.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = archive.cpp; sourceTree = "<group>"; };
 		8CC8CE8717A9445600BC796A /* bsx-satellaview.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "bsx-satellaview.cpp"; sourceTree = "<group>"; };
@@ -815,14 +830,6 @@
 		8CC8D1B717A9445700BC796A /* serialization.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = serialization.cpp; sourceTree = "<group>"; };
 		8CC8D1B817A9445700BC796A /* upd96050.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = upd96050.cpp; sourceTree = "<group>"; };
 		8CC8D1B917A9445700BC796A /* upd96050.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = upd96050.hpp; sourceTree = "<group>"; };
-		8CC8D1BC17A9445700BC796A /* manifest.bml */ = {isa = PBXFileReference; lastKnownFileType = text; path = manifest.bml; sourceTree = "<group>"; };
-		8CC8D1BE17A9445700BC796A /* manifest.bml */ = {isa = PBXFileReference; lastKnownFileType = text; path = manifest.bml; sourceTree = "<group>"; };
-		8CC8D1C017A9445700BC796A /* boot.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = boot.rom; sourceTree = "<group>"; };
-		8CC8D1C117A9445700BC796A /* manifest.bml */ = {isa = PBXFileReference; lastKnownFileType = text; path = manifest.bml; sourceTree = "<group>"; };
-		8CC8D1C317A9445700BC796A /* boot.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = boot.rom; sourceTree = "<group>"; };
-		8CC8D1C417A9445700BC796A /* manifest.bml */ = {isa = PBXFileReference; lastKnownFileType = text; path = manifest.bml; sourceTree = "<group>"; };
-		8CC8D1C617A9445700BC796A /* ipl.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = ipl.rom; sourceTree = "<group>"; };
-		8CC8D1C717A9445700BC796A /* manifest.bml */ = {isa = PBXFileReference; lastKnownFileType = text; path = manifest.bml; sourceTree = "<group>"; };
 		8CC8D1CA17A9445700BC796A /* alsa.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = alsa.cpp; sourceTree = "<group>"; };
 		8CC8D1CB17A9445700BC796A /* ao.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ao.cpp; sourceTree = "<group>"; };
 		8CC8D1CC17A9445700BC796A /* directsound.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = directsound.cpp; sourceTree = "<group>"; };
@@ -1198,6 +1205,7 @@
 		8CA9071217A84F72001591B7 = {
 			isa = PBXGroup;
 			children = (
+				8CB7C5C517B275BE00B3117C /* Resources */,
 				8CC8CE8317A9444700BC796A /* Classes */,
 				8CA9072517A84F72001591B7 /* Supporting Files */,
 				8CA9071D17A84F72001591B7 /* Frameworks */,
@@ -1243,6 +1251,13 @@
 			path = Higan;
 			sourceTree = "<group>";
 		};
+		8CB7C5C517B275BE00B3117C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		8CC8CE8317A9444700BC796A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1253,6 +1268,7 @@
 				8CC8D38717A9445800BC796A /* HiganInterface.h */,
 				8CC8D38917A9445800BC796A /* HiganInterface.mm */,
 				8CC8D3C117A949F900BC796A /* OESNESSystemResponderClient.h */,
+				8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2788,56 +2804,13 @@
 		8CC8D1BA17A9445700BC796A /* profile */ = {
 			isa = PBXGroup;
 			children = (
-				8CC8D1BB17A9445700BC796A /* Famicom.sys */,
-				8CC8D1BD17A9445700BC796A /* Game Boy Advance.sys */,
-				8CC8D1BF17A9445700BC796A /* Game Boy Color.sys */,
-				8CC8D1C217A9445700BC796A /* Game Boy.sys */,
-				8CC8D1C517A9445700BC796A /* Super Famicom.sys */,
+				8CB7C5CC17B2760200B3117C /* Famicom.sys */,
+				8CB7C5CD17B2760200B3117C /* Game Boy Advance.sys */,
+				8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */,
+				8CB7C5CF17B2760200B3117C /* Game Boy.sys */,
+				8CB7C5D017B2760200B3117C /* Super Famicom.sys */,
 			);
 			path = profile;
-			sourceTree = "<group>";
-		};
-		8CC8D1BB17A9445700BC796A /* Famicom.sys */ = {
-			isa = PBXGroup;
-			children = (
-				8CC8D1BC17A9445700BC796A /* manifest.bml */,
-			);
-			path = Famicom.sys;
-			sourceTree = "<group>";
-		};
-		8CC8D1BD17A9445700BC796A /* Game Boy Advance.sys */ = {
-			isa = PBXGroup;
-			children = (
-				8CC8D1BE17A9445700BC796A /* manifest.bml */,
-			);
-			path = "Game Boy Advance.sys";
-			sourceTree = "<group>";
-		};
-		8CC8D1BF17A9445700BC796A /* Game Boy Color.sys */ = {
-			isa = PBXGroup;
-			children = (
-				8CC8D1C017A9445700BC796A /* boot.rom */,
-				8CC8D1C117A9445700BC796A /* manifest.bml */,
-			);
-			path = "Game Boy Color.sys";
-			sourceTree = "<group>";
-		};
-		8CC8D1C217A9445700BC796A /* Game Boy.sys */ = {
-			isa = PBXGroup;
-			children = (
-				8CC8D1C317A9445700BC796A /* boot.rom */,
-				8CC8D1C417A9445700BC796A /* manifest.bml */,
-			);
-			path = "Game Boy.sys";
-			sourceTree = "<group>";
-		};
-		8CC8D1C517A9445700BC796A /* Super Famicom.sys */ = {
-			isa = PBXGroup;
-			children = (
-				8CC8D1C617A9445700BC796A /* ipl.rom */,
-				8CC8D1C717A9445700BC796A /* manifest.bml */,
-			);
-			path = "Super Famicom.sys";
 			sourceTree = "<group>";
 		};
 		8CC8D1C817A9445700BC796A /* ruby */ = {
@@ -4001,8 +3974,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA9072917A84F72001591B7 /* InfoPlist.strings in Resources */,
-				8C9C9F0B17B1BEA1005A128E /* ipl.rom in Resources */,
-				8C9C9F0C17B1C0CF005A128E /* manifest.bml in Resources */,
+				8CB7C5D117B2760600B3117C /* Super Famicom.sys in Resources */,
+				8CB7C5D217B2760900B3117C /* Game Boy Advance.sys in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4079,6 +4052,15 @@
 				8CB8851417AA7899001E5AD3 /* cpu.cpp in Sources */,
 				8CB8851617AA78A8001E5AD3 /* smp.cpp in Sources */,
 				8CB8851717AA78BE001E5AD3 /* ppu.cpp in Sources */,
+				8CB7C5D317B27CB700B3117C /* system.cpp in Sources */,
+				8CB7C5D417B27CBB00B3117C /* scheduler.cpp in Sources */,
+				8CB7C5D517B27CC100B3117C /* ppu.cpp in Sources */,
+				8CB7C5D617B27CC700B3117C /* memory.cpp in Sources */,
+				8CB7C5D717B27CCC00B3117C /* interface.cpp in Sources */,
+				8CB7C5D817B27CD000B3117C /* video.cpp in Sources */,
+				8CB7C5D917B27CD700B3117C /* cpu.cpp in Sources */,
+				8CB7C5DA17B27CDD00B3117C /* cartridge.cpp in Sources */,
+				8CB7C5DB17B27CE200B3117C /* apu.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
