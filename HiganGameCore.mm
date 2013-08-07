@@ -82,14 +82,14 @@ typedef enum OERunningSystem : NSUInteger
     {
         suffix = @"Super Famicom.sys";
         _emulator  = new SuperFamicom::Interface;
-        id = SuperFamicom::ID::ROM;
+        id = SuperFamicom::ID::SuperFamicom;
         _runningSystem = OESuperFamicomSystem;
     }
     else if([[self systemIdentifier] isEqualToString:@"openemu.system.gba"])
     {
         suffix = @"Game Boy Advance.sys";
         _emulator  = new GameBoyAdvance::Interface;
-        id = GameBoyAdvance::ID::ROM;
+        id = GameBoyAdvance::ID::GameBoyAdvance;
         _runningSystem = OEGameBoyAdvanceSystem;
     }
     else

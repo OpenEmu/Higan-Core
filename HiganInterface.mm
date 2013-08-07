@@ -29,6 +29,7 @@
 #import <OpenEmuBase/OERingBuffer.h>
 
 #include "ananke/heuristics/super-famicom.hpp"
+#include "ananke/heuristics/game-boy-advance.hpp"
 
 #include <nall/stream.hpp>
 
@@ -46,8 +47,11 @@ void Interface::loadRequest(unsigned id, string path)
     if(path.equals("manifest.bml"))
     {
         NSData *rom = [NSData dataWithContentsOfFile:[[core romPath] stringByStandardizingPath]];
-        
-        string markup = SuperFamicomCartridge((const uint8_t *)[rom bytes], [rom length]).markup;
+        string markup;
+        if([[[core romPath] pathExtension] isEqualToString:@"gba"])
+            markup = GameBoyAdvanceCartridge((const uint8_t *)[rom bytes], [rom length]).markup;
+        else
+            markup = SuperFamicomCartridge((const uint8_t *)[rom bytes], [rom length]).markup;
         memorystream stream((const uint8_t *)markup.data(), markup.size());
         return emulator->load(id, stream);
     }
