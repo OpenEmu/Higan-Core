@@ -51,21 +51,8 @@ typedef enum OERunningSystem : NSUInteger
 
 @implementation HiganGameCore
 
-- (id)init
-{
-    self = [super init];
-
-    if(self != nil)
-    {
-        _buffer = new uint32_t[512 * 480];
-    }
-
-    return self;
-}
-
 - (void)dealloc
 {
-    delete [] _buffer;
     delete _interface;
 }
 
@@ -73,8 +60,6 @@ typedef enum OERunningSystem : NSUInteger
 
 - (BOOL)loadFileAtPath:(NSString *)path
 {
-    _romPath = [path copy];
-
     NSString *suffix;
     unsigned id;
 
@@ -102,10 +87,9 @@ typedef enum OERunningSystem : NSUInteger
 
     NSLog(@"Higan: Loading game");
 
-    _interface = new Interface;
+    _interface = new Interface(path, _emulator);
     
-    _interface->core = self;
-    _interface->emulator = _emulator;
+    _interface->ringBuffer = [self ringBufferAtIndex:0];
     
     _interface->paths.append([resourceDirectory UTF8String]);
     _interface->paths.append([[self biosDirectoryPath] UTF8String]);
@@ -164,7 +148,7 @@ typedef enum OERunningSystem : NSUInteger
 
 - (OEIntRect)screenRect
 {
-    return OEIntRectMake(0, 0, _width, _height);
+    return OEIntRectMake(0, 0, _interface->width, _interface->height);
 }
 
 - (OEIntSize)bufferSize
@@ -174,7 +158,7 @@ typedef enum OERunningSystem : NSUInteger
 
 - (const void *)videoBuffer
 {
-    return _buffer;
+    return _interface->videoBuffer;
 }
 
 - (GLenum)pixelFormat

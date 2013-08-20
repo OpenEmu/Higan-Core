@@ -32,12 +32,4 @@
 
 OE_EXPORTED_CLASS
 @interface HiganGameCore : OEGameCore
-
-@property(readonly) NSString *romPath;
-
-@property NSUInteger width;
-@property NSUInteger height;
-
-@property uint32_t *buffer;
-
 @end

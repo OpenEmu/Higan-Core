@@ -24,8 +24,9 @@
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#import "HiganGameCore.h"
+
 #import "OESNESSystemResponderClient.h"
+#import <OpenEmuBase/OERingBuffer.h>
 
 #include <phoenix/cocoa/header.hpp>
 #include <emulator/emulator.hpp>
@@ -43,8 +44,14 @@ struct Interface : Emulator::Interface::Bind {
     string server();
     void notify(string text);
 
-    HiganGameCore *core;
     Emulator::Interface *emulator;
     lstring paths;
     BOOL inputState[2][OESNESButtonCount] = { 0 };
+    int width, height;
+    uint32_t *videoBuffer;
+    NSString *romPath;
+    OERingBuffer *ringBuffer;
+
+    Interface(NSString *path, Emulator::Interface *emulator);
+    ~Interface();
 };

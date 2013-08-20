@@ -26,7 +26,6 @@
  */
 
 #import "HiganInterface.h"
-#import <OpenEmuBase/OERingBuffer.h>
 
 #include "ananke/heuristics/super-famicom.hpp"
 #include "ananke/heuristics/game-boy-advance.hpp"
@@ -34,6 +33,18 @@
 #include <nall/stream.hpp>
 
 #include <sfc/interface/interface.hpp>
+
+Interface::Interface(NSString *path, Emulator::Interface *emulator)
+{
+    romPath = [path copy];
+    videoBuffer = new uint32_t[512 * 480];
+    this->emulator = emulator;
+}
+
+Interface::~Interface()
+{
+    delete [] videoBuffer;
+}
 
 void Interface::loadRequest(unsigned id, string name, string type)
 {
@@ -46,9 +57,9 @@ void Interface::loadRequest(unsigned id, string path)
 
     if(path.equals("manifest.bml"))
     {
-        NSData *rom = [NSData dataWithContentsOfFile:[[core romPath] stringByStandardizingPath]];
+        NSData *rom = [NSData dataWithContentsOfFile:[romPath stringByStandardizingPath]];
         string markup;
-        if([[[core romPath] pathExtension] isEqualToString:@"gba"])
+        if([[romPath pathExtension] isEqualToString:@"gba"])
             markup = GameBoyAdvanceCartridge((const uint8_t *)[rom bytes], [rom length]).markup;
         else
             markup = SuperFamicomCartridge((const uint8_t *)[rom bytes], [rom length]).markup;
@@ -57,7 +68,7 @@ void Interface::loadRequest(unsigned id, string path)
     }
     else if(path.equals("program.rom"))
     {
-        mmapstream stream([[core romPath] UTF8String]);
+        mmapstream stream([romPath UTF8String]);
         return emulator->load(id, stream);
     }
 
@@ -88,7 +99,7 @@ uint32_t Interface::videoColor(unsigned source, uint16_t r, uint16_t g, uint16_t
     return r << 16 | g << 8 | b << 0;
 }
 
-void Interface::videoRefresh(const uint32_t* data, unsigned pitch, unsigned width, unsigned height)
+void Interface::videoRefresh(const uint32_t* data, unsigned pitch, unsigned newWidth, unsigned newHeight)
 {
     pitch >>= 2;
 /*
@@ -99,15 +110,15 @@ void Interface::videoRefresh(const uint32_t* data, unsigned pitch, unsigned widt
     else if(height == 480)
         height = 448;
 */
-    core.width  = width;
-    core.height = height;
+    width  = newWidth;
+    height = newHeight;
 
     dispatch_queue_t the_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 
     dispatch_apply(height, the_queue, ^(size_t y)
     {
         const uint32_t *src = (uint32_t*)data + y * pitch;
-        uint32_t *dst = core.buffer + y * 512;
+        uint32_t *dst = videoBuffer + y * 512;
 
         memcpy(dst, src, sizeof(uint32_t)*width);
     });
@@ -115,8 +126,8 @@ void Interface::videoRefresh(const uint32_t* data, unsigned pitch, unsigned widt
 
 void Interface::audioSample(int16_t lsample, int16_t rsample)
 {
-    [[core ringBufferAtIndex:0] write:&lsample maxLength:2];
-    [[core ringBufferAtIndex:0] write:&rsample maxLength:2];
+    [ringBuffer write:&lsample maxLength:2];
+    [ringBuffer write:&rsample maxLength:2];
 }
 
 int16_t Interface::inputPoll(unsigned port, unsigned device, unsigned input)

@@ -106,7 +106,8 @@
 		8CA9072317A84F72001591B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8CA9072617A84F72001591B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8CA9072817A84F72001591B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = OEGBASystemResponderClient.h; path = "../OpenEmu/GameBoy Advance/OEGBASystemResponderClient.h"; sourceTree = "<group>"; };
+		8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = OEGBSystemResponderClient.h; path = ../OpenEmu/GameBoy/OEGBSystemResponderClient.h; sourceTree = "<group>"; };
+		8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBASystemResponderClient.h; path = "../OpenEmu/GameBoy Advance/OEGBASystemResponderClient.h"; sourceTree = "<group>"; };
 		8CB7C5CC17B2760200B3117C /* Famicom.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Famicom.sys; sourceTree = "<group>"; };
 		8CB7C5CD17B2760200B3117C /* Game Boy Advance.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy Advance.sys"; sourceTree = "<group>"; };
 		8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy Color.sys"; sourceTree = "<group>"; };
@@ -1205,7 +1206,6 @@
 		8CA9071217A84F72001591B7 = {
 			isa = PBXGroup;
 			children = (
-				8CB7C5C517B275BE00B3117C /* Resources */,
 				8CC8CE8317A9444700BC796A /* Classes */,
 				8CA9072517A84F72001591B7 /* Supporting Files */,
 				8CA9071D17A84F72001591B7 /* Frameworks */,
@@ -1251,13 +1251,6 @@
 			path = Higan;
 			sourceTree = "<group>";
 		};
-		8CB7C5C517B275BE00B3117C /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		8CC8CE8317A9444700BC796A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1269,6 +1262,7 @@
 				8CC8D38917A9445800BC796A /* HiganInterface.mm */,
 				8CC8D3C117A949F900BC796A /* OESNESSystemResponderClient.h */,
 				8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */,
+				8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
