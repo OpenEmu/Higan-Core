@@ -24,6 +24,9 @@
 /* Begin PBXBuildFile section */
 		8CA9071F17A84F72001591B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA9071E17A84F72001591B7 /* Cocoa.framework */; };
 		8CA9072917A84F72001591B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8CA9072717A84F72001591B7 /* InfoPlist.strings */; };
+		8CB5AC5F17C362CD00EB28E7 /* Game Boy.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CF17B2760200B3117C /* Game Boy.sys */; };
+		8CB5AC6017C362CF00EB28E7 /* Game Boy Color.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */; };
+		8CB5AC6117C362D300EB28E7 /* Famicom.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CC17B2760200B3117C /* Famicom.sys */; };
 		8CB7C5D117B2760600B3117C /* Super Famicom.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5D017B2760200B3117C /* Super Famicom.sys */; };
 		8CB7C5D217B2760900B3117C /* Game Boy Advance.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CD17B2760200B3117C /* Game Boy Advance.sys */; };
 		8CB7C5D317B27CB700B3117C /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF9F17A9445600BC796A /* system.cpp */; };
@@ -106,7 +109,7 @@
 		8CA9072317A84F72001591B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8CA9072617A84F72001591B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8CA9072817A84F72001591B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = OEGBSystemResponderClient.h; path = ../OpenEmu/GameBoy/OEGBSystemResponderClient.h; sourceTree = "<group>"; };
+		8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBSystemResponderClient.h; path = ../OpenEmu/GameBoy/OEGBSystemResponderClient.h; sourceTree = "<group>"; };
 		8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBASystemResponderClient.h; path = "../OpenEmu/GameBoy Advance/OEGBASystemResponderClient.h"; sourceTree = "<group>"; };
 		8CB7C5CC17B2760200B3117C /* Famicom.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Famicom.sys; sourceTree = "<group>"; };
 		8CB7C5CD17B2760200B3117C /* Game Boy Advance.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy Advance.sys"; sourceTree = "<group>"; };
@@ -3970,6 +3973,9 @@
 				8CA9072917A84F72001591B7 /* InfoPlist.strings in Resources */,
 				8CB7C5D117B2760600B3117C /* Super Famicom.sys in Resources */,
 				8CB7C5D217B2760900B3117C /* Game Boy Advance.sys in Resources */,
+				8CB5AC5F17C362CD00EB28E7 /* Game Boy.sys in Resources */,
+				8CB5AC6017C362CF00EB28E7 /* Game Boy Color.sys in Resources */,
+				8CB5AC6117C362D300EB28E7 /* Famicom.sys in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

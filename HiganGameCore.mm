@@ -25,28 +25,26 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <OpenEmuBase/OERingBuffer.h>
+
 #import "HiganGameCore.h"
 #import "HiganInterface.h"
 #import "OESNESSystemResponderClient.h"
 #import "OEGBASystemResponderClient.h"
+#import "OEGBSystemResponderClient.h"
 
-#include <sfc/interface/interface.hpp>
-#include <gba/interface/interface.hpp>
+#include <nall/stream.hpp>
+#include <nall/file.hpp>
 
-typedef enum OERunningSystem : NSUInteger
-{
-    OESuperFamicomSystem,
-    OEGameBoyAdvanceSystem,
-    OESystemCount,
-    OESystemUnknown = NSNotFound,
-} OERunningSystem;
+#include "ananke/heuristics/super-famicom.hpp"
+#include "ananke/heuristics/game-boy-advance.hpp"
+#include "ananke/heuristics/game-boy.hpp"
 
-@interface HiganGameCore () <OESNESSystemResponderClient, OEGBASystemResponderClient>
+@interface HiganGameCore () <OESNESSystemResponderClient, OEGBASystemResponderClient, OEGBSystemResponderClient>
 {
     Interface *_interface;
-    Emulator::Interface *_emulator;
+    OESystemIndex _activeSystem;
 }
-@property OERunningSystem runningSystem;
 @end
 
 @implementation HiganGameCore
@@ -60,56 +58,93 @@ typedef enum OERunningSystem : NSUInteger
 
 - (BOOL)loadFileAtPath:(NSString *)path
 {
-    NSString *suffix;
-    unsigned id;
+    _interface = new Interface;
+
+    string romName          = [[path lastPathComponent] UTF8String];
+    unsigned systemID;
+
+    vector<uint8_t> buffer = file::read([path UTF8String]);
+    _interface->bundlePath = [[[[self owner] bundle] resourcePath] UTF8String];
+    _interface->supportPath    = [[self supportDirectoryPath] UTF8String];
+    _interface->biosPath    = [[self biosDirectoryPath] UTF8String];
 
     if([[self systemIdentifier] isEqualToString:@"openemu.system.snes"])
     {
-        suffix = @"Super Famicom.sys";
-        _emulator  = new SuperFamicom::Interface;
-        id = SuperFamicom::ID::SuperFamicom;
-        _runningSystem = OESuperFamicomSystem;
+        systemID = SuperFamicom::ID::SuperFamicom;
+        _activeSystem = OESuperFamicomSystem;
+        _interface->loadMedia(romName, "Super Famicom", _activeSystem, systemID);
+
+        if((buffer.size() & 0x7fff) == 512) buffer.remove(0, 512);  //strip copier header, if present
+
+        SuperFamicomCartridge manifest(buffer.data(), buffer.size());
+
+        file::write({_interface->path(systemID), "manifest.bml"}, manifest.markup);
+
+        if(!manifest.markup.find("spc7110"))
+            file::write({_interface->path(systemID), "program.rom"}, buffer.data(), manifest.rom_size);
+        else
+        {
+            file::write({_interface->path(systemID), "program.rom"}, buffer.data(), 0x100000);
+            file::write({_interface->path(systemID), "data.rom"}, buffer.data() + 0x100000, manifest.rom_size - 0x100000);
+        }
     }
     else if([[self systemIdentifier] isEqualToString:@"openemu.system.gba"])
     {
-        suffix = @"Game Boy Advance.sys";
-        _emulator  = new GameBoyAdvance::Interface;
-        id = GameBoyAdvance::ID::GameBoyAdvance;
-        _runningSystem = OEGameBoyAdvanceSystem;
+        systemID = GameBoyAdvance::ID::GameBoyAdvance;
+        _activeSystem = OEGameBoyAdvanceSystem;
+        _interface->loadMedia(romName, "Game Boy Advance", _activeSystem, systemID);
+
+        GameBoyAdvanceCartridge manifest(buffer.data(), buffer.size());
+
+        file::write({_interface->path(systemID), "manifest.bml"}, manifest.markup);
+        file::write({_interface->path(systemID), "program.rom"}, buffer);
+    }
+    else if([[self systemIdentifier] isEqualToString:@"openemu.system.gb"])
+    {
+        GameBoyCartridge manifest(buffer.data(), buffer.size());
+        string systemName = "Game Boy";
+        systemID = GameBoy::ID::GameBoy;
+        _activeSystem = OEGameBoySystem;
+
+        if(manifest.info.cgb || manifest.info.cgbonly)
+        {
+            systemID = GameBoy::ID::GameBoyColor;
+            systemName = "Game Boy Color";
+        }
+
+        _interface->loadMedia(romName, systemName, _activeSystem, systemID);
+
+        file::write({_interface->path(systemID), "manifest.bml"}, manifest.markup);
+        file::write({_interface->path(systemID), "program.rom"}, buffer);
+
+        string sgbRomPath = {_interface->biosPath, "/Super Game Boy (World).sfc"};
+        string sgbBootRomPath = {_interface->biosPath, "/sgb.boot.rom"};
+        bool sgbAvailable = file::exists(sgbRomPath) && file::exists(sgbBootRomPath);
+        
+        // Check for Super Game Boy header
+        if(sgbAvailable && (buffer[0x0146] & 0x03) == 0x03)
+        {
+            buffer = file::read(sgbRomPath);
+            systemID = SuperFamicom::ID::SuperFamicom;
+            systemName = "Super Famicom";
+            _activeSystem = OESuperFamicomSystem;
+
+            SuperFamicomCartridge sgbManifest(buffer.data(), buffer.size());
+            _interface->loadMedia("Super Game Boy (World).sfc", systemName, _activeSystem, systemID);
+
+            file::write({_interface->path(systemID), "manifest.bml"}, sgbManifest.markup);
+            file::write({_interface->path(systemID), "program.rom"}, buffer);
+            file::copy(sgbBootRomPath, {_interface->path(systemID), "sgb.boot.rom"});
+        }
     }
     else
     {
         return NO;
     }
-    
-    NSString *resourceDirectory = [[[[self owner] bundle] resourcePath] stringByAppendingPathComponent:suffix];
-    NSString *supportDirectory = [[self supportDirectoryPath] stringByAppendingFormat:@"/%@/%@", suffix, [path lastPathComponent]];
 
     NSLog(@"Higan: Loading game");
 
-    _interface = new Interface(path, _emulator);
-    
-    _interface->ringBuffer = [self ringBufferAtIndex:0];
-    
-    _interface->paths.append([resourceDirectory UTF8String]);
-    _interface->paths.append([[self biosDirectoryPath] UTF8String]);
-    _interface->paths.append([supportDirectory UTF8String]);
-
-    for(auto& path : _interface->paths) path.append("/");
-
-    _emulator->bind = _interface;
-    _emulator->load(id);
-
-    if(!_emulator->loaded())
-    {
-        NSLog(@"Higan: ROM did not load correctly");
-        return NO;
-    }
-
-    _emulator->power();
-    _emulator->paletteUpdate();
-
-    _emulator->run();
+    _interface->load(systemID);
 
     return YES;
 }
@@ -121,17 +156,38 @@ typedef enum OERunningSystem : NSUInteger
 
 - (void)executeFrameSkippingFrame:(BOOL)skip
 {
-    _emulator->run();
+    _interface->run();
+
+    signed samples[2];
+    while(_interface->resampler.pending())
+    {
+        _interface->resampler.read(samples);
+        [[self ringBufferAtIndex:0] write:&samples[0] maxLength:2];
+        [[self ringBufferAtIndex:0] write:&samples[1] maxLength:2];
+    }
 }
 
 - (void)resetEmulation
 {
-    _emulator->reset();
+    _interface->active->reset();
 }
 
 - (void)stopEmulation
 {
-    _emulator->save();
+    _interface->active->save();
+
+    // Clean-up
+    for(auto &path : _interface->pathname)
+    {
+        file::remove({path, "manifest.bml"});
+        file::remove({path, "program.rom"});
+        file::remove({path, "data.rom"});
+        file::remove({path, "sgb.boot.rom"});
+
+        lstring contents = directory::contents(path);
+        if(contents.empty())
+            directory::remove(path);
+    }
 
     [super stopEmulation];
 }
@@ -140,10 +196,17 @@ typedef enum OERunningSystem : NSUInteger
 
 - (OEIntSize)aspectSize
 {
-    if(_runningSystem == OESuperFamicomSystem)
-        return OEIntSizeMake(8, 7);
-    else
-        return OEIntSizeMake(3, 2);
+    switch(_activeSystem)
+    {
+        case OESuperFamicomSystem:
+            return OEIntSizeMake(8, 7);
+        case OEGameBoyAdvanceSystem:
+            return OEIntSizeMake(3, 2);
+        case OEGameBoySystem:
+            return OEIntSizeMake(10, 9);
+        default:
+            return OEIntSizeMake(4, 3);
+    }
 }
 
 - (OEIntRect)screenRect
@@ -178,7 +241,7 @@ typedef enum OERunningSystem : NSUInteger
 
 - (NSTimeInterval)frameInterval
 {
-    return _emulator->videoFrequency();
+    return _interface->active->videoFrequency();
 }
 
 #pragma mark - Audio
@@ -190,14 +253,14 @@ typedef enum OERunningSystem : NSUInteger
 
 - (double)audioSampleRate
 {
-    return _emulator->audioFrequency();
+    return 44100;
 }
 
 #pragma mark - Save State
 
 - (BOOL)saveStateToFileAtPath:(NSString *)fileName
 {
-    serializer state = _emulator->serialize();
+    serializer state = _interface->active->serialize();
 
     FILE  *saveStateFile = fopen([fileName UTF8String], "wb");
     size_t bytesWritten  = fwrite(state.data(), sizeof(uint8_t), state.size(), saveStateFile);
@@ -217,7 +280,7 @@ typedef enum OERunningSystem : NSUInteger
     NSData *state = [NSData dataWithContentsOfFile:fileName];
     serializer stateToLoad((const uint8_t *)[state bytes], [state length]);
 
-    _emulator->unserialize(stateToLoad);
+    _interface->active->unserialize(stateToLoad);
 
     return YES;
 }
@@ -246,6 +309,24 @@ static const int inputMapGameBoyAdvance [] = {6, 7, 5, 4, 0, 1, 9, 8, 3, 2};
 - (oneway void)didReleaseGBAButton:(OEGBAButton)button forPlayer:(NSUInteger)player
 {
     _interface->inputState[player - 1][inputMapGameBoyAdvance[button]] = 0;
+}
+
+static const int inputMapGameBoy [] = {0, 1, 2, 3, 5, 4, 7, 6};
+
+- (oneway void)didPushGBButton:(OEGBButton)button
+{
+    if(_activeSystem == OEGameBoySystem)
+        _interface->inputState[0][inputMapGameBoy[button]] = 1;
+    else
+        _interface->inputState[0][inputMapSuperFamicom[button]] = 1;
+}
+
+- (oneway void)didReleaseGBButton:(OEGBButton)button
+{
+    if(_activeSystem == OEGameBoySystem)
+        _interface->inputState[0][inputMapGameBoy[button]] = 0;
+    else
+        _interface->inputState[0][inputMapSuperFamicom[button]] = 0;
 }
 
 @end

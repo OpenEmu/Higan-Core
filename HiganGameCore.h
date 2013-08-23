@@ -28,8 +28,6 @@
 #import <Cocoa/Cocoa.h>
 #import <OpenEmuBase/OEGameCore.h>
 
-#include <emulator/emulator.hpp>
-
 OE_EXPORTED_CLASS
 @interface HiganGameCore : OEGameCore
 @end

@@ -27,18 +27,18 @@
 
 #import "HiganInterface.h"
 
-#include "ananke/heuristics/super-famicom.hpp"
-#include "ananke/heuristics/game-boy-advance.hpp"
-
 #include <nall/stream.hpp>
 
-#include <sfc/interface/interface.hpp>
-
-Interface::Interface(NSString *path, Emulator::Interface *emulator)
+Interface::Interface()
 {
-    romPath = [path copy];
     videoBuffer = new uint32_t[512 * 480];
-    this->emulator = emulator;
+    
+    emulator(OESuperFamicomSystem)   = new SuperFamicom::Interface;
+    emulator(OEGameBoySystem)        = new GameBoy::Interface;
+    emulator(OEGameBoyAdvanceSystem) = new GameBoyAdvance::Interface;
+    //emulator(OEFamicomSystem)        = new Famicom::Interface;
+
+    for(auto& system : emulator) system->bind = this;
 }
 
 Interface::~Interface()
@@ -48,38 +48,26 @@ Interface::~Interface()
 
 void Interface::loadRequest(unsigned id, string name, string type)
 {
-    NSLog(@"loadRequest(unsigned id, string name, string type) not implemented");
+    paths(id) = pathname(0);
+    return active->load(id);
 }
 
 void Interface::loadRequest(unsigned id, string path)
 {
     NSLog(@"Loading file \"%s\"", path.data());
 
-    if(path.equals("manifest.bml"))
+    string fullpath = {paths(active->group(id)), path};
+    if(file::exists(fullpath) == true)
     {
-        NSData *rom = [NSData dataWithContentsOfFile:[romPath stringByStandardizingPath]];
-        string markup;
-        if([[romPath pathExtension] isEqualToString:@"gba"])
-            markup = GameBoyAdvanceCartridge((const uint8_t *)[rom bytes], [rom length]).markup;
-        else
-            markup = SuperFamicomCartridge((const uint8_t *)[rom bytes], [rom length]).markup;
-        memorystream stream((const uint8_t *)markup.data(), markup.size());
-        return emulator->load(id, stream);
-    }
-    else if(path.equals("program.rom"))
-    {
-        mmapstream stream([romPath UTF8String]);
-        return emulator->load(id, stream);
+        mmapstream stream(fullpath);
+        return active->load(id, stream);
     }
 
-    for(auto& prefix : paths)
+    fullpath = {biosPath, "/", path};
+    if(file::exists(fullpath) == true)
     {
-        string filePath = {prefix, path};
-        if(file::exists(filePath))
-        {
-            mmapstream stream(filePath);
-            return emulator->load(id, stream);
-        }
+        mmapstream stream(fullpath);
+        return active->load(id, stream);
     }
 
     NSLog(@"Higan: Wasn't able to load file \"%s\"", path.data());
@@ -87,10 +75,11 @@ void Interface::loadRequest(unsigned id, string path)
 
 void Interface::saveRequest(unsigned id, string path)
 {
-    directory::create(paths(2));
-    string pathname = {paths(2), path};
+    NSLog(@"Saving file \"%s\"", path.data());
+    
+    string pathname = {paths(active->group(id)), path};
     filestream stream(pathname, file::mode::write);
-    return emulator->save(id, stream);
+    return active->save(id, stream);
 }
 
 uint32_t Interface::videoColor(unsigned source, uint16_t r, uint16_t g, uint16_t b)
@@ -126,8 +115,8 @@ void Interface::videoRefresh(const uint32_t* data, unsigned pitch, unsigned newW
 
 void Interface::audioSample(int16_t lsample, int16_t rsample)
 {
-    [ringBuffer write:&lsample maxLength:2];
-    [ringBuffer write:&rsample maxLength:2];
+    signed samples[] = {lsample, rsample};
+    resampler.sample(samples);
 }
 
 int16_t Interface::inputPoll(unsigned port, unsigned device, unsigned input)
@@ -142,12 +131,7 @@ unsigned Interface::dipSettings(const Markup::Node& node)
 
 string Interface::path(unsigned group)
 {
-    if(group == 0)
-        // resource path
-        return paths(0);
-    else
-        // support path
-        return paths(2);
+    return paths(group);
 }
 
 string Interface::server()
@@ -158,5 +142,35 @@ string Interface::server()
 void Interface::notify(string text)
 {
     NSLog(@"Higan: %s", text.data());
+}
+
+void Interface::loadMedia(string path, string systemName, unsigned emulatorIndex, unsigned mediaID)
+{    
+    paths(0) = {bundlePath, "/", systemName, ".sys/"};
+    paths(mediaID) = {supportPath, "/", systemName, "/", path, "/"};
+    pathname.append(paths(mediaID));
+    active = emulator(emulatorIndex);
+    directory::create(paths(mediaID));
+}
+
+void Interface::load(unsigned id)
+{
+    active->load(id);
+    active->power();
+
+    active->paletteUpdate();
+    initializeResampler();
+
+    run();
+}
+
+void Interface::run()
+{
+    active->run();
+}
+
+void Interface::initializeResampler()
+{
+    resampler.setFrequency(active->audioFrequency());
 }
 

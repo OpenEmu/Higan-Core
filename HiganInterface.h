@@ -25,11 +25,24 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "OESNESSystemResponderClient.h"
-#import <OpenEmuBase/OERingBuffer.h>
-
 #include <phoenix/cocoa/header.hpp>
 #include <emulator/emulator.hpp>
+#include <nall/dsp.hpp>
+
+#include <fc/interface/interface.hpp>
+#include <sfc/interface/interface.hpp>
+#include <gb/interface/interface.hpp>
+#include <gba/interface/interface.hpp>
+
+typedef enum OESystemIndex : NSUInteger
+{
+    OESuperFamicomSystem,
+    OEGameBoySystem,
+    OEGameBoyAdvanceSystem,
+    OEFamicomSystem,
+    OESystemCount,
+    OESystemUnknown = NSNotFound,
+} OESystemIndex;
 
 struct Interface : Emulator::Interface::Bind {
     void loadRequest(unsigned id, string name, string type);
@@ -44,14 +57,26 @@ struct Interface : Emulator::Interface::Bind {
     string server();
     void notify(string text);
 
-    Emulator::Interface *emulator;
+    void loadMedia(string path, string systemName, unsigned emulatorIndex, unsigned mediaID);
+    void load(unsigned id);
+    void run();
+
+    vector<Emulator::Interface*> emulator;
+    Emulator::Interface* active = nullptr;
+    
     lstring paths;
-    BOOL inputState[2][OESNESButtonCount] = { 0 };
+    lstring pathname;
+    string supportPath;
+    string bundlePath;
+    string biosPath;
+    BOOL inputState[2][12] = { 0 };
+    
     int width, height;
     uint32_t *videoBuffer;
-    NSString *romPath;
-    OERingBuffer *ringBuffer;
+        
+    DSP resampler;
+    void initializeResampler();
 
-    Interface(NSString *path, Emulator::Interface *emulator);
+    Interface();
     ~Interface();
 };
