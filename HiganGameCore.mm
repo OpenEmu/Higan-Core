@@ -43,7 +43,6 @@
 @interface HiganGameCore () <OESNESSystemResponderClient, OEGBASystemResponderClient, OEGBSystemResponderClient>
 {
     Interface *_interface;
-    OESystemIndex _activeSystem;
 }
 @end
 
@@ -71,8 +70,8 @@
     if([[self systemIdentifier] isEqualToString:@"openemu.system.snes"])
     {
         systemID = SuperFamicom::ID::SuperFamicom;
-        _activeSystem = OESuperFamicomSystem;
-        _interface->loadMedia(romName, "Super Famicom", _activeSystem, systemID);
+        _interface->activeSystem = OESuperFamicomSystem;
+        _interface->loadMedia(romName, "Super Famicom", _interface->activeSystem, systemID);
 
         if((buffer.size() & 0x7fff) == 512) buffer.remove(0, 512);  //strip copier header, if present
 
@@ -91,8 +90,8 @@
     else if([[self systemIdentifier] isEqualToString:@"openemu.system.gba"])
     {
         systemID = GameBoyAdvance::ID::GameBoyAdvance;
-        _activeSystem = OEGameBoyAdvanceSystem;
-        _interface->loadMedia(romName, "Game Boy Advance", _activeSystem, systemID);
+        _interface->activeSystem = OEGameBoyAdvanceSystem;
+        _interface->loadMedia(romName, "Game Boy Advance", _interface->activeSystem, systemID);
 
         GameBoyAdvanceCartridge manifest(buffer.data(), buffer.size());
 
@@ -104,7 +103,7 @@
         GameBoyCartridge manifest(buffer.data(), buffer.size());
         string systemName = "Game Boy";
         systemID = GameBoy::ID::GameBoy;
-        _activeSystem = OEGameBoySystem;
+        _interface->activeSystem = OEGameBoySystem;
 
         if(manifest.info.cgb || manifest.info.cgbonly)
         {
@@ -112,7 +111,7 @@
             systemName = "Game Boy Color";
         }
 
-        _interface->loadMedia(romName, systemName, _activeSystem, systemID);
+        _interface->loadMedia(romName, systemName, _interface->activeSystem, systemID);
 
         file::write({_interface->path(systemID), "manifest.bml"}, manifest.markup);
         file::write({_interface->path(systemID), "program.rom"}, buffer);
@@ -127,10 +126,10 @@
             buffer = file::read(sgbRomPath);
             systemID = SuperFamicom::ID::SuperFamicom;
             systemName = "Super Famicom";
-            _activeSystem = OESuperFamicomSystem;
+            _interface->activeSystem = OESuperFamicomSystem;
 
             SuperFamicomCartridge sgbManifest(buffer.data(), buffer.size());
-            _interface->loadMedia("Super Game Boy (World).sfc", systemName, _activeSystem, systemID);
+            _interface->loadMedia("Super Game Boy (World).sfc", systemName, _interface->activeSystem, systemID);
 
             file::write({_interface->path(systemID), "manifest.bml"}, sgbManifest.markup);
             file::write({_interface->path(systemID), "program.rom"}, buffer);
@@ -196,10 +195,8 @@
 
 - (OEIntSize)aspectSize
 {
-    switch(_activeSystem)
+    switch(_interface->activeSystem)
     {
-        case OESuperFamicomSystem:
-            return OEIntSizeMake(8, 7);
         case OEGameBoyAdvanceSystem:
             return OEIntSizeMake(3, 2);
         case OEGameBoySystem:
@@ -312,21 +309,22 @@ static const int inputMapGameBoyAdvance [] = {6, 7, 5, 4, 0, 1, 9, 8, 3, 2};
 }
 
 static const int inputMapGameBoy [] = {0, 1, 2, 3, 5, 4, 7, 6};
+static const int inputMapSuperGameBoy [] = {4, 5, 6, 7, 8, 0, 3, 2};
 
 - (oneway void)didPushGBButton:(OEGBButton)button
 {
-    if(_activeSystem == OEGameBoySystem)
+    if(_interface->activeSystem == OEGameBoySystem)
         _interface->inputState[0][inputMapGameBoy[button]] = 1;
     else
-        _interface->inputState[0][inputMapSuperFamicom[button]] = 1;
+        _interface->inputState[0][inputMapSuperGameBoy[button]] = 1;
 }
 
 - (oneway void)didReleaseGBButton:(OEGBButton)button
 {
-    if(_activeSystem == OEGameBoySystem)
+    if(_interface->activeSystem == OEGameBoySystem)
         _interface->inputState[0][inputMapGameBoy[button]] = 0;
     else
-        _interface->inputState[0][inputMapSuperFamicom[button]] = 0;
+        _interface->inputState[0][inputMapSuperGameBoy[button]] = 0;
 }
 
 @end

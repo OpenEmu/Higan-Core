@@ -63,7 +63,8 @@ struct Interface : Emulator::Interface::Bind {
 
     vector<Emulator::Interface*> emulator;
     Emulator::Interface* active = nullptr;
-    
+    OESystemIndex activeSystem;
+
     lstring paths;
     lstring pathname;
     string supportPath;

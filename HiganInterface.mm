@@ -91,16 +91,19 @@ uint32_t Interface::videoColor(unsigned source, uint16_t r, uint16_t g, uint16_t
 void Interface::videoRefresh(const uint32_t* data, unsigned pitch, unsigned newWidth, unsigned newHeight)
 {
     pitch >>= 2;
-/*
-    // Remove overscan
-    data += 8 * pitch;
-    if(height == 240)
-        height = 224;
-    else if(height == 480)
-        height = 448;
-*/
+
     width  = newWidth;
     height = newHeight;
+
+    if(activeSystem == OESuperFamicomSystem)
+    {
+        // Remove overscan
+        data += 8 * pitch;
+        if(height == 240)
+            height = 224;
+        else if(height == 480)
+            height = 448;
+    }
 
     dispatch_queue_t the_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 
