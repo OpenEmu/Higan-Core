@@ -41,6 +41,17 @@
 		8CB8851417AA7899001E5AD3 /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D1F617A9445700BC796A /* cpu.cpp */; };
 		8CB8851617AA78A8001E5AD3 /* smp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D24917A9445700BC796A /* smp.cpp */; };
 		8CB8851717AA78BE001E5AD3 /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D22617A9445700BC796A /* ppu.cpp */; };
+		8CC100E017CD4ED90086A9CD /* apu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEB617A9445600BC796A /* apu.cpp */; };
+		8CC100E117CD4EDE0086A9CD /* cartridge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEDD17A9445600BC796A /* cartridge.cpp */; };
+		8CC100E217CD4EE60086A9CD /* cheat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEED17A9445600BC796A /* cheat.cpp */; };
+		8CC100E317CD4EF20086A9CD /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEF017A9445600BC796A /* cpu.cpp */; };
+		8CC100E417CD4F000086A9CD /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEF617A9445600BC796A /* input.cpp */; };
+		8CC100E517CD4F080086A9CD /* interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEFA17A9445600BC796A /* interface.cpp */; };
+		8CC100E617CD4F0D0086A9CD /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEFE17A9445600BC796A /* memory.cpp */; };
+		8CC100E717CD4F120086A9CD /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF0117A9445600BC796A /* ppu.cpp */; };
+		8CC100E817CD4F160086A9CD /* scheduler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF0517A9445600BC796A /* scheduler.cpp */; };
+		8CC100E917CD4F1A0086A9CD /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF0917A9445600BC796A /* system.cpp */; };
+		8CC100EA17CD4F1F0086A9CD /* video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF0C17A9445600BC796A /* video.cpp */; };
 		8CC8D38A17A945FD00BC796A /* HiganGameCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D38817A9445800BC796A /* HiganGameCore.mm */; };
 		8CC8D38B17A945FD00BC796A /* HiganInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D38917A9445800BC796A /* HiganInterface.mm */; };
 		8CC8D38C17A9460800BC796A /* apu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF1017A9445600BC796A /* apu.cpp */; };
@@ -116,6 +127,7 @@
 		8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy Color.sys"; sourceTree = "<group>"; };
 		8CB7C5CF17B2760200B3117C /* Game Boy.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy.sys"; sourceTree = "<group>"; };
 		8CB7C5D017B2760200B3117C /* Super Famicom.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Super Famicom.sys"; sourceTree = "<group>"; };
+		8CC100DF17CD4C3D0086A9CD /* OENESSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = OENESSystemResponderClient.h; path = ../OpenEmu/NES/OENESSystemResponderClient.h; sourceTree = "<group>"; };
 		8CC8CE8517A9445600BC796A /* ananke.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ananke.cpp; sourceTree = "<group>"; };
 		8CC8CE8617A9445600BC796A /* archive.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = archive.cpp; sourceTree = "<group>"; };
 		8CC8CE8717A9445600BC796A /* bsx-satellaview.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "bsx-satellaview.cpp"; sourceTree = "<group>"; };
@@ -1263,9 +1275,10 @@
 				8CC8D38817A9445800BC796A /* HiganGameCore.mm */,
 				8CC8D38717A9445800BC796A /* HiganInterface.h */,
 				8CC8D38917A9445800BC796A /* HiganInterface.mm */,
-				8CC8D3C117A949F900BC796A /* OESNESSystemResponderClient.h */,
 				8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */,
 				8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */,
+				8CC100DF17CD4C3D0086A9CD /* OENESSystemResponderClient.h */,
+				8CC8D3C117A949F900BC796A /* OESNESSystemResponderClient.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -4061,6 +4074,17 @@
 				8CB7C5D917B27CD700B3117C /* cpu.cpp in Sources */,
 				8CB7C5DA17B27CDD00B3117C /* cartridge.cpp in Sources */,
 				8CB7C5DB17B27CE200B3117C /* apu.cpp in Sources */,
+				8CC100E017CD4ED90086A9CD /* apu.cpp in Sources */,
+				8CC100E117CD4EDE0086A9CD /* cartridge.cpp in Sources */,
+				8CC100E217CD4EE60086A9CD /* cheat.cpp in Sources */,
+				8CC100E317CD4EF20086A9CD /* cpu.cpp in Sources */,
+				8CC100E417CD4F000086A9CD /* input.cpp in Sources */,
+				8CC100E517CD4F080086A9CD /* interface.cpp in Sources */,
+				8CC100E617CD4F0D0086A9CD /* memory.cpp in Sources */,
+				8CC100E717CD4F120086A9CD /* ppu.cpp in Sources */,
+				8CC100E817CD4F160086A9CD /* scheduler.cpp in Sources */,
+				8CC100E917CD4F1A0086A9CD /* system.cpp in Sources */,
+				8CC100EA17CD4F1F0086A9CD /* video.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

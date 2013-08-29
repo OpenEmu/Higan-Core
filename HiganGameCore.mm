@@ -32,15 +32,17 @@
 #import "OESNESSystemResponderClient.h"
 #import "OEGBASystemResponderClient.h"
 #import "OEGBSystemResponderClient.h"
+#import "OENESSystemResponderClient.h"
 
 #include <nall/stream.hpp>
 #include <nall/file.hpp>
 
-#include "ananke/heuristics/super-famicom.hpp"
+#include "ananke/heuristics/famicom.hpp"
 #include "ananke/heuristics/game-boy-advance.hpp"
 #include "ananke/heuristics/game-boy.hpp"
+#include "ananke/heuristics/super-famicom.hpp"
 
-@interface HiganGameCore () <OESNESSystemResponderClient, OEGBASystemResponderClient, OEGBSystemResponderClient>
+@interface HiganGameCore () <OESNESSystemResponderClient, OEGBASystemResponderClient, OEGBSystemResponderClient, OENESSystemResponderClient>
 {
     Interface *_interface;
 }
@@ -59,13 +61,13 @@
 {
     _interface = new Interface;
 
+    _interface->bundlePath  = [[[[self owner] bundle] resourcePath] UTF8String];
+    _interface->supportPath = [[self supportDirectoryPath] UTF8String];
+    _interface->biosPath    = [[self biosDirectoryPath] UTF8String];
+
+    vector<uint8_t> buffer  = file::read([path UTF8String]);
     string romName          = [[path lastPathComponent] UTF8String];
     unsigned systemID;
-
-    vector<uint8_t> buffer = file::read([path UTF8String]);
-    _interface->bundlePath = [[[[self owner] bundle] resourcePath] UTF8String];
-    _interface->supportPath    = [[self supportDirectoryPath] UTF8String];
-    _interface->biosPath    = [[self biosDirectoryPath] UTF8String];
 
     if([[self systemIdentifier] isEqualToString:@"openemu.system.snes"])
     {
@@ -136,9 +138,18 @@
             file::copy(sgbBootRomPath, {_interface->path(systemID), "sgb.boot.rom"});
         }
     }
-    else
+    else if([[self systemIdentifier] isEqualToString:@"openemu.system.nes"])
     {
-        return NO;
+        systemID = Famicom::ID::Famicom;
+        _interface->activeSystem = OEFamicomSystem;
+        _interface->loadMedia(romName, "Famicom", _interface->activeSystem, systemID);
+
+        FamicomCartridge manifest(buffer.data(), buffer.size());
+
+        file::write({_interface->path(systemID), "manifest.bml"}, manifest.markup);
+        file::write({_interface->path(systemID), "program.rom"}, buffer.data() + 16, manifest.prgrom);
+        if(manifest.chrrom > 0)
+            file::write({_interface->path(systemID), "character.rom"}, buffer.data() + 16 + manifest.prgrom, manifest.chrrom);
     }
 
     NSLog(@"Higan: Loading game");
@@ -182,6 +193,7 @@
         file::remove({path, "program.rom"});
         file::remove({path, "data.rom"});
         file::remove({path, "sgb.boot.rom"});
+        file::remove({path, "character.rom"});
 
         lstring contents = directory::contents(path);
         if(contents.empty())
@@ -325,6 +337,18 @@ static const int inputMapSuperGameBoy [] = {4, 5, 6, 7, 8, 0, 3, 2};
         _interface->inputState[0][inputMapGameBoy[button]] = 0;
     else
         _interface->inputState[0][inputMapSuperGameBoy[button]] = 0;
+}
+
+static const int inputMapFamicom [] = {4, 5, 6, 7, 0, 1, 3, 2};
+
+- (oneway void)didPushNESButton:(OENESButton)button forPlayer:(NSUInteger)player
+{
+    _interface->inputState[player - 1][inputMapFamicom[button]] = 1;
+}
+
+- (oneway void)didReleaseNESButton:(OENESButton)button forPlayer:(NSUInteger)player
+{
+    _interface->inputState[player - 1][inputMapFamicom[button]] = 0;
 }
 
 @end

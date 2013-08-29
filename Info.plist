@@ -29,6 +29,7 @@
 		<string>openemu.system.snes</string>
 		<string>openemu.system.gba</string>
 		<string>openemu.system.gb</string>
+		<string>openemu.system.nes</string>
 	</array>
 	<key>SUEnableAutomaticChecks</key>
 	<string>1</string>

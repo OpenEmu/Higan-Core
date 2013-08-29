@@ -36,7 +36,7 @@ Interface::Interface()
     emulator(OESuperFamicomSystem)   = new SuperFamicom::Interface;
     emulator(OEGameBoySystem)        = new GameBoy::Interface;
     emulator(OEGameBoyAdvanceSystem) = new GameBoyAdvance::Interface;
-    //emulator(OEFamicomSystem)        = new Famicom::Interface;
+    emulator(OEFamicomSystem)        = new Famicom::Interface;
 
     for(auto& system : emulator) system->bind = this;
 }
