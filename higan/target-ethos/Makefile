@@ -7,7 +7,6 @@ include fc/Makefile
 include sfc/Makefile
 include gb/Makefile
 include gba/Makefile
-# include nds/Makefile
 
 ui_objects := ui-ethos ui-configuration ui-interface ui-utility
 ui_objects += ui-input ui-window ui-general ui-settings ui-tools

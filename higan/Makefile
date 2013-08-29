@@ -4,7 +4,6 @@ fc  := fc
 sfc := sfc
 gb  := gb
 gba := gba
-# nds := nds
 
 profile := accuracy
 target  := ethos

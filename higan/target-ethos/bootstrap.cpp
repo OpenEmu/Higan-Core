@@ -2,7 +2,6 @@
 #include <sfc/interface/interface.hpp>
 #include <gb/interface/interface.hpp>
 #include <gba/interface/interface.hpp>
-//#include <nds/interface/interface.hpp>
 
 void Program::bootstrap() {
   interface = new Interface;
@@ -11,7 +10,6 @@ void Program::bootstrap() {
   emulator.append(new SuperFamicom::Interface);
   emulator.append(new GameBoy::Interface);
   emulator.append(new GameBoyAdvance::Interface);
-//emulator.append(new NintendoDS::Interface);
 
   for(auto& system : emulator) system->bind = interface;
 }

@@ -121,42 +121,42 @@
 		8CA9072617A84F72001591B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8CA9072817A84F72001591B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBSystemResponderClient.h; path = ../OpenEmu/GameBoy/OEGBSystemResponderClient.h; sourceTree = "<group>"; };
+		8CB6B01117CF590800972B9D /* ananke.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ananke.cpp; sourceTree = "<group>"; };
+		8CB6B01217CF590800972B9D /* archive.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = archive.cpp; sourceTree = "<group>"; };
+		8CB6B01317CF590800972B9D /* bsx-satellaview.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "bsx-satellaview.cpp"; sourceTree = "<group>"; };
+		8CB6B01417CF590800972B9D /* configuration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = configuration.cpp; sourceTree = "<group>"; };
+		8CB6B01617CF590800972B9D /* bsx-satellaview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "bsx-satellaview.hpp"; sourceTree = "<group>"; };
+		8CB6B01717CF590800972B9D /* sufami-turbo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "sufami-turbo.hpp"; sourceTree = "<group>"; };
+		8CB6B01817CF590800972B9D /* super-famicom.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "super-famicom.hpp"; sourceTree = "<group>"; };
+		8CB6B01917CF590800972B9D /* famicom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = famicom.cpp; sourceTree = "<group>"; };
+		8CB6B01A17CF590800972B9D /* file-dialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "file-dialog.cpp"; sourceTree = "<group>"; };
+		8CB6B01B17CF590800972B9D /* game-boy-advance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "game-boy-advance.cpp"; sourceTree = "<group>"; };
+		8CB6B01C17CF590800972B9D /* game-boy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "game-boy.cpp"; sourceTree = "<group>"; };
+		8CB6B01E17CF590800972B9D /* famicom.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = famicom.hpp; sourceTree = "<group>"; };
+		8CB6B01F17CF590800972B9D /* game-boy-advance.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "game-boy-advance.hpp"; sourceTree = "<group>"; };
+		8CB6B02017CF590800972B9D /* game-boy.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "game-boy.hpp"; sourceTree = "<group>"; };
+		8CB6B02117CF590800972B9D /* satellaview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = satellaview.hpp; sourceTree = "<group>"; };
+		8CB6B02217CF590800972B9D /* sufami-turbo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "sufami-turbo.hpp"; sourceTree = "<group>"; };
+		8CB6B02317CF590800972B9D /* super-famicom.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "super-famicom.hpp"; sourceTree = "<group>"; };
+		8CB6B02417CF590800972B9D /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		8CB6B02617CF590800972B9D /* patch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = patch.cpp; sourceTree = "<group>"; };
+		8CB6B02817CF590800972B9D /* archive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = archive.png; sourceTree = "<group>"; };
+		8CB6B02917CF590800972B9D /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
+		8CB6B02A17CF590800972B9D /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
+		8CB6B02B17CF590800972B9D /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		8CB6B02C17CF590800972B9D /* resource.bml */ = {isa = PBXFileReference; lastKnownFileType = text; path = resource.bml; sourceTree = "<group>"; };
+		8CB6B02D17CF590800972B9D /* resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = resource.cpp; sourceTree = "<group>"; };
+		8CB6B02E17CF590800972B9D /* resource.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = resource.hpp; sourceTree = "<group>"; };
+		8CB6B02F17CF590800972B9D /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
+		8CB6B03017CF590800972B9D /* sufami-turbo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "sufami-turbo.cpp"; sourceTree = "<group>"; };
+		8CB6B03117CF590800972B9D /* super-famicom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "super-famicom.cpp"; sourceTree = "<group>"; };
 		8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBASystemResponderClient.h; path = "../OpenEmu/GameBoy Advance/OEGBASystemResponderClient.h"; sourceTree = "<group>"; };
 		8CB7C5CC17B2760200B3117C /* Famicom.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Famicom.sys; sourceTree = "<group>"; };
 		8CB7C5CD17B2760200B3117C /* Game Boy Advance.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy Advance.sys"; sourceTree = "<group>"; };
 		8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy Color.sys"; sourceTree = "<group>"; };
 		8CB7C5CF17B2760200B3117C /* Game Boy.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy.sys"; sourceTree = "<group>"; };
 		8CB7C5D017B2760200B3117C /* Super Famicom.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Super Famicom.sys"; sourceTree = "<group>"; };
-		8CC100DF17CD4C3D0086A9CD /* OENESSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file; name = OENESSystemResponderClient.h; path = ../OpenEmu/NES/OENESSystemResponderClient.h; sourceTree = "<group>"; };
-		8CC8CE8517A9445600BC796A /* ananke.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ananke.cpp; sourceTree = "<group>"; };
-		8CC8CE8617A9445600BC796A /* archive.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = archive.cpp; sourceTree = "<group>"; };
-		8CC8CE8717A9445600BC796A /* bsx-satellaview.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "bsx-satellaview.cpp"; sourceTree = "<group>"; };
-		8CC8CE8817A9445600BC796A /* configuration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = configuration.cpp; sourceTree = "<group>"; };
-		8CC8CE8A17A9445600BC796A /* bsx-satellaview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "bsx-satellaview.hpp"; sourceTree = "<group>"; };
-		8CC8CE8B17A9445600BC796A /* sufami-turbo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "sufami-turbo.hpp"; sourceTree = "<group>"; };
-		8CC8CE8C17A9445600BC796A /* super-famicom.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "super-famicom.hpp"; sourceTree = "<group>"; };
-		8CC8CE8D17A9445600BC796A /* famicom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = famicom.cpp; sourceTree = "<group>"; };
-		8CC8CE8E17A9445600BC796A /* file-dialog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "file-dialog.cpp"; sourceTree = "<group>"; };
-		8CC8CE8F17A9445600BC796A /* game-boy-advance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "game-boy-advance.cpp"; sourceTree = "<group>"; };
-		8CC8CE9017A9445600BC796A /* game-boy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "game-boy.cpp"; sourceTree = "<group>"; };
-		8CC8CE9217A9445600BC796A /* famicom.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = famicom.hpp; sourceTree = "<group>"; };
-		8CC8CE9317A9445600BC796A /* game-boy-advance.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "game-boy-advance.hpp"; sourceTree = "<group>"; };
-		8CC8CE9417A9445600BC796A /* game-boy.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "game-boy.hpp"; sourceTree = "<group>"; };
-		8CC8CE9517A9445600BC796A /* satellaview.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = satellaview.hpp; sourceTree = "<group>"; };
-		8CC8CE9617A9445600BC796A /* sufami-turbo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "sufami-turbo.hpp"; sourceTree = "<group>"; };
-		8CC8CE9717A9445600BC796A /* super-famicom.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = "super-famicom.hpp"; sourceTree = "<group>"; };
-		8CC8CE9817A9445600BC796A /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		8CC8CE9A17A9445600BC796A /* patch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = patch.cpp; sourceTree = "<group>"; };
-		8CC8CE9C17A9445600BC796A /* archive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = archive.png; sourceTree = "<group>"; };
-		8CC8CE9D17A9445600BC796A /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
-		8CC8CE9E17A9445600BC796A /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
-		8CC8CE9F17A9445600BC796A /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
-		8CC8CEA017A9445600BC796A /* resource.bml */ = {isa = PBXFileReference; lastKnownFileType = text; path = resource.bml; sourceTree = "<group>"; };
-		8CC8CEA117A9445600BC796A /* resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = resource.cpp; sourceTree = "<group>"; };
-		8CC8CEA217A9445600BC796A /* resource.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = resource.hpp; sourceTree = "<group>"; };
-		8CC8CEA317A9445600BC796A /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
-		8CC8CEA417A9445600BC796A /* sufami-turbo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "sufami-turbo.cpp"; sourceTree = "<group>"; };
-		8CC8CEA517A9445600BC796A /* super-famicom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "super-famicom.cpp"; sourceTree = "<group>"; };
+		8CC100DF17CD4C3D0086A9CD /* OENESSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OENESSystemResponderClient.h; path = ../OpenEmu/NES/OENESSystemResponderClient.h; sourceTree = "<group>"; };
 		8CC8CEA817A9445600BC796A /* cheats.bml */ = {isa = PBXFileReference; lastKnownFileType = text; path = cheats.bml; sourceTree = "<group>"; };
 		8CC8CEA917A9445600BC796A /* higan.desktop */ = {isa = PBXFileReference; lastKnownFileType = text; path = higan.desktop; sourceTree = "<group>"; };
 		8CC8CEAA17A9445600BC796A /* higan.ico */ = {isa = PBXFileReference; lastKnownFileType = image.ico; path = higan.ico; sourceTree = "<group>"; };
@@ -1266,10 +1266,77 @@
 			path = Higan;
 			sourceTree = "<group>";
 		};
+		8CB6B01017CF590700972B9D /* ananke */ = {
+			isa = PBXGroup;
+			children = (
+				8CB6B01117CF590800972B9D /* ananke.cpp */,
+				8CB6B01217CF590800972B9D /* archive.cpp */,
+				8CB6B01317CF590800972B9D /* bsx-satellaview.cpp */,
+				8CB6B01417CF590800972B9D /* configuration.cpp */,
+				8CB6B01517CF590800972B9D /* database */,
+				8CB6B01917CF590800972B9D /* famicom.cpp */,
+				8CB6B01A17CF590800972B9D /* file-dialog.cpp */,
+				8CB6B01B17CF590800972B9D /* game-boy-advance.cpp */,
+				8CB6B01C17CF590800972B9D /* game-boy.cpp */,
+				8CB6B01D17CF590800972B9D /* heuristics */,
+				8CB6B02417CF590800972B9D /* Makefile */,
+				8CB6B02517CF590800972B9D /* obj */,
+				8CB6B02617CF590800972B9D /* patch.cpp */,
+				8CB6B02717CF590800972B9D /* resource */,
+				8CB6B03017CF590800972B9D /* sufami-turbo.cpp */,
+				8CB6B03117CF590800972B9D /* super-famicom.cpp */,
+			);
+			path = ananke;
+			sourceTree = "<group>";
+		};
+		8CB6B01517CF590800972B9D /* database */ = {
+			isa = PBXGroup;
+			children = (
+				8CB6B01617CF590800972B9D /* bsx-satellaview.hpp */,
+				8CB6B01717CF590800972B9D /* sufami-turbo.hpp */,
+				8CB6B01817CF590800972B9D /* super-famicom.hpp */,
+			);
+			path = database;
+			sourceTree = "<group>";
+		};
+		8CB6B01D17CF590800972B9D /* heuristics */ = {
+			isa = PBXGroup;
+			children = (
+				8CB6B01E17CF590800972B9D /* famicom.hpp */,
+				8CB6B01F17CF590800972B9D /* game-boy-advance.hpp */,
+				8CB6B02017CF590800972B9D /* game-boy.hpp */,
+				8CB6B02117CF590800972B9D /* satellaview.hpp */,
+				8CB6B02217CF590800972B9D /* sufami-turbo.hpp */,
+				8CB6B02317CF590800972B9D /* super-famicom.hpp */,
+			);
+			path = heuristics;
+			sourceTree = "<group>";
+		};
+		8CB6B02517CF590800972B9D /* obj */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = obj;
+			sourceTree = "<group>";
+		};
+		8CB6B02717CF590800972B9D /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				8CB6B02817CF590800972B9D /* archive.png */,
+				8CB6B02917CF590800972B9D /* file.png */,
+				8CB6B02A17CF590800972B9D /* folder.png */,
+				8CB6B02B17CF590800972B9D /* home.png */,
+				8CB6B02C17CF590800972B9D /* resource.bml */,
+				8CB6B02D17CF590800972B9D /* resource.cpp */,
+				8CB6B02E17CF590800972B9D /* resource.hpp */,
+				8CB6B02F17CF590800972B9D /* up.png */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
 		8CC8CE8317A9444700BC796A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8CC8CE8417A9445600BC796A /* ananke */,
 				8CC8CEA617A9445600BC796A /* higan */,
 				8CC8D38617A9445800BC796A /* HiganGameCore.h */,
 				8CC8D38817A9445800BC796A /* HiganGameCore.mm */,
@@ -1283,77 +1350,10 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		8CC8CE8417A9445600BC796A /* ananke */ = {
-			isa = PBXGroup;
-			children = (
-				8CC8CE8517A9445600BC796A /* ananke.cpp */,
-				8CC8CE8617A9445600BC796A /* archive.cpp */,
-				8CC8CE8717A9445600BC796A /* bsx-satellaview.cpp */,
-				8CC8CE8817A9445600BC796A /* configuration.cpp */,
-				8CC8CE8917A9445600BC796A /* database */,
-				8CC8CE8D17A9445600BC796A /* famicom.cpp */,
-				8CC8CE8E17A9445600BC796A /* file-dialog.cpp */,
-				8CC8CE8F17A9445600BC796A /* game-boy-advance.cpp */,
-				8CC8CE9017A9445600BC796A /* game-boy.cpp */,
-				8CC8CE9117A9445600BC796A /* heuristics */,
-				8CC8CE9817A9445600BC796A /* Makefile */,
-				8CC8CE9917A9445600BC796A /* obj */,
-				8CC8CE9A17A9445600BC796A /* patch.cpp */,
-				8CC8CE9B17A9445600BC796A /* resource */,
-				8CC8CEA417A9445600BC796A /* sufami-turbo.cpp */,
-				8CC8CEA517A9445600BC796A /* super-famicom.cpp */,
-			);
-			path = ananke;
-			sourceTree = "<group>";
-		};
-		8CC8CE8917A9445600BC796A /* database */ = {
-			isa = PBXGroup;
-			children = (
-				8CC8CE8A17A9445600BC796A /* bsx-satellaview.hpp */,
-				8CC8CE8B17A9445600BC796A /* sufami-turbo.hpp */,
-				8CC8CE8C17A9445600BC796A /* super-famicom.hpp */,
-			);
-			path = database;
-			sourceTree = "<group>";
-		};
-		8CC8CE9117A9445600BC796A /* heuristics */ = {
-			isa = PBXGroup;
-			children = (
-				8CC8CE9217A9445600BC796A /* famicom.hpp */,
-				8CC8CE9317A9445600BC796A /* game-boy-advance.hpp */,
-				8CC8CE9417A9445600BC796A /* game-boy.hpp */,
-				8CC8CE9517A9445600BC796A /* satellaview.hpp */,
-				8CC8CE9617A9445600BC796A /* sufami-turbo.hpp */,
-				8CC8CE9717A9445600BC796A /* super-famicom.hpp */,
-			);
-			path = heuristics;
-			sourceTree = "<group>";
-		};
-		8CC8CE9917A9445600BC796A /* obj */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = obj;
-			sourceTree = "<group>";
-		};
-		8CC8CE9B17A9445600BC796A /* resource */ = {
-			isa = PBXGroup;
-			children = (
-				8CC8CE9C17A9445600BC796A /* archive.png */,
-				8CC8CE9D17A9445600BC796A /* file.png */,
-				8CC8CE9E17A9445600BC796A /* folder.png */,
-				8CC8CE9F17A9445600BC796A /* home.png */,
-				8CC8CEA017A9445600BC796A /* resource.bml */,
-				8CC8CEA117A9445600BC796A /* resource.cpp */,
-				8CC8CEA217A9445600BC796A /* resource.hpp */,
-				8CC8CEA317A9445600BC796A /* up.png */,
-			);
-			path = resource;
-			sourceTree = "<group>";
-		};
 		8CC8CEA617A9445600BC796A /* higan */ = {
 			isa = PBXGroup;
 			children = (
+				8CB6B01017CF590700972B9D /* ananke */,
 				8CC8CEA717A9445600BC796A /* data */,
 				8CC8CEAF17A9445600BC796A /* emulator */,
 				8CC8CEB417A9445600BC796A /* fc */,
@@ -4105,6 +4105,7 @@
 				8CA9072817A84F72001591B7 /* en */,
 			);
 			name = InfoPlist.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
