@@ -48,8 +48,8 @@ Interface::~Interface()
 
 void Interface::loadRequest(unsigned id, string name, string type)
 {
-    paths(id) = pathname(0);
-    return active->load(id);
+    paths(id) = gamePaths(0);
+    active->load(id);
 }
 
 void Interface::loadRequest(unsigned id, string path)
@@ -57,13 +57,6 @@ void Interface::loadRequest(unsigned id, string path)
     NSLog(@"Loading file \"%s\"", path.data());
 
     string fullpath = {paths(active->group(id)), path};
-    if(file::exists(fullpath) == true)
-    {
-        mmapstream stream(fullpath);
-        return active->load(id, stream);
-    }
-
-    fullpath = {biosPath, "/", path};
     if(file::exists(fullpath) == true)
     {
         mmapstream stream(fullpath);
@@ -79,7 +72,7 @@ void Interface::saveRequest(unsigned id, string path)
     
     string pathname = {paths(active->group(id)), path};
     filestream stream(pathname, file::mode::write);
-    return active->save(id, stream);
+    active->save(id, stream);
 }
 
 uint32_t Interface::videoColor(unsigned source, uint16_t r, uint16_t g, uint16_t b)
@@ -106,7 +99,6 @@ void Interface::videoRefresh(const uint32_t* data, unsigned pitch, unsigned newW
     }
 
     dispatch_queue_t the_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-
     dispatch_apply(height, the_queue, ^(size_t y)
     {
         const uint32_t *src = (uint32_t*)data + y * pitch;
@@ -147,18 +139,22 @@ void Interface::notify(string text)
     NSLog(@"Higan: %s", text.data());
 }
 
-void Interface::loadMedia(string path, string systemName, unsigned emulatorIndex, unsigned mediaID)
+void Interface::loadMedia(string path, string systemName, OESystemIndex emulatorIndex, unsigned mediaID)
 {    
     paths(0) = {bundlePath, "/", systemName, ".sys/"};
     paths(mediaID) = {supportPath, "/", systemName, "/", path, "/"};
-    pathname.append(paths(mediaID));
-    active = emulator(emulatorIndex);
     directory::create(paths(mediaID));
+    gamePaths.append(paths(mediaID));
+
+    this->mediaID = mediaID;
+    
+    activeSystem = emulatorIndex;
+    active = emulator(emulatorIndex);
 }
 
-void Interface::load(unsigned id)
+void Interface::load()
 {
-    active->load(id);
+    active->load(mediaID);
     active->power();
 
     active->paletteUpdate();

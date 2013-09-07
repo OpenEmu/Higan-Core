@@ -57,16 +57,17 @@ struct Interface : Emulator::Interface::Bind {
     string server();
     void notify(string text);
 
-    void loadMedia(string path, string systemName, unsigned emulatorIndex, unsigned mediaID);
-    void load(unsigned id);
+    void loadMedia(string path, string systemName, OESystemIndex emulatorIndex, unsigned mediaID);
+    void load();
     void run();
 
     vector<Emulator::Interface*> emulator;
     Emulator::Interface* active = nullptr;
     OESystemIndex activeSystem;
+    unsigned mediaID;
 
     lstring paths;
-    lstring pathname;
+    lstring gamePaths;
     string supportPath;
     string bundlePath;
     string biosPath;

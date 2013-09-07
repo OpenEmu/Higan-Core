@@ -24,6 +24,7 @@
 /* Begin PBXBuildFile section */
 		8CA9071F17A84F72001591B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA9071E17A84F72001591B7 /* Cocoa.framework */; };
 		8CA9072917A84F72001591B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8CA9072717A84F72001591B7 /* InfoPlist.strings */; };
+		8CB3C3E817DB65B400F9A971 /* HiganImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3C3E717DB65B400F9A971 /* HiganImporter.mm */; };
 		8CB5AC5F17C362CD00EB28E7 /* Game Boy.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CF17B2760200B3117C /* Game Boy.sys */; };
 		8CB5AC6017C362CF00EB28E7 /* Game Boy Color.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */; };
 		8CB5AC6117C362D300EB28E7 /* Famicom.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CC17B2760200B3117C /* Famicom.sys */; };
@@ -120,6 +121,8 @@
 		8CA9072317A84F72001591B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8CA9072617A84F72001591B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8CA9072817A84F72001591B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8CB3C3E617DB65B400F9A971 /* HiganImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiganImporter.h; sourceTree = "<group>"; };
+		8CB3C3E717DB65B400F9A971 /* HiganImporter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HiganImporter.mm; sourceTree = "<group>"; };
 		8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBSystemResponderClient.h; path = ../OpenEmu/GameBoy/OEGBSystemResponderClient.h; sourceTree = "<group>"; };
 		8CB6B01117CF590800972B9D /* ananke.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ananke.cpp; sourceTree = "<group>"; };
 		8CB6B01217CF590800972B9D /* archive.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = archive.cpp; sourceTree = "<group>"; };
@@ -1342,6 +1345,8 @@
 				8CC8D38817A9445800BC796A /* HiganGameCore.mm */,
 				8CC8D38717A9445800BC796A /* HiganInterface.h */,
 				8CC8D38917A9445800BC796A /* HiganInterface.mm */,
+				8CB3C3E617DB65B400F9A971 /* HiganImporter.h */,
+				8CB3C3E717DB65B400F9A971 /* HiganImporter.mm */,
 				8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */,
 				8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */,
 				8CC100DF17CD4C3D0086A9CD /* OENESSystemResponderClient.h */,
@@ -4085,6 +4090,7 @@
 				8CC100E817CD4F160086A9CD /* scheduler.cpp in Sources */,
 				8CC100E917CD4F1A0086A9CD /* system.cpp in Sources */,
 				8CC100EA17CD4F1F0086A9CD /* video.cpp in Sources */,
+				8CB3C3E817DB65B400F9A971 /* HiganImporter.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

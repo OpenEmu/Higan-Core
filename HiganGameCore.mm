@@ -29,18 +29,12 @@
 
 #import "HiganGameCore.h"
 #import "HiganInterface.h"
+#import "HiganImporter.h"
+
 #import "OESNESSystemResponderClient.h"
 #import "OEGBASystemResponderClient.h"
 #import "OEGBSystemResponderClient.h"
 #import "OENESSystemResponderClient.h"
-
-#include <nall/stream.hpp>
-#include <nall/file.hpp>
-
-#include "ananke/heuristics/famicom.hpp"
-#include "ananke/heuristics/game-boy-advance.hpp"
-#include "ananke/heuristics/game-boy.hpp"
-#include "ananke/heuristics/super-famicom.hpp"
 
 @interface HiganGameCore () <OESNESSystemResponderClient, OEGBASystemResponderClient, OEGBSystemResponderClient, OENESSystemResponderClient>
 {
@@ -63,98 +57,64 @@
 
     _interface->bundlePath  = [[[[self owner] bundle] resourcePath] UTF8String];
     _interface->supportPath = [[self supportDirectoryPath] UTF8String];
-    _interface->biosPath    = [[self biosDirectoryPath] UTF8String];
 
     vector<uint8_t> buffer  = file::read([path UTF8String]);
     string romName          = [[path lastPathComponent] UTF8String];
-    unsigned systemID;
+    string biosPath         = [[self biosDirectoryPath] UTF8String];
 
     if([[self systemIdentifier] isEqualToString:@"openemu.system.snes"])
     {
-        systemID = SuperFamicom::ID::SuperFamicom;
-        _interface->activeSystem = OESuperFamicomSystem;
-        _interface->loadMedia(romName, "Super Famicom", _interface->activeSystem, systemID);
-
-        if((buffer.size() & 0x7fff) == 512) buffer.remove(0, 512);  //strip copier header, if present
-
-        SuperFamicomCartridge manifest(buffer.data(), buffer.size());
-
-        file::write({_interface->path(systemID), "manifest.bml"}, manifest.markup);
-
-        if(!manifest.markup.find("spc7110"))
-            file::write({_interface->path(systemID), "program.rom"}, buffer.data(), manifest.rom_size);
-        else
-        {
-            file::write({_interface->path(systemID), "program.rom"}, buffer.data(), 0x100000);
-            file::write({_interface->path(systemID), "data.rom"}, buffer.data() + 0x100000, manifest.rom_size - 0x100000);
-        }
+        _interface->loadMedia(romName, "Super Famicom", OESuperFamicomSystem, SuperFamicom::ID::SuperFamicom);
+        importSuperFamicom(_interface->path(SuperFamicom::ID::SuperFamicom), biosPath, buffer);
     }
     else if([[self systemIdentifier] isEqualToString:@"openemu.system.gba"])
     {
-        systemID = GameBoyAdvance::ID::GameBoyAdvance;
-        _interface->activeSystem = OEGameBoyAdvanceSystem;
-        _interface->loadMedia(romName, "Game Boy Advance", _interface->activeSystem, systemID);
+        string gbaBiosPath = {biosPath, "/bios.rom"};
 
-        GameBoyAdvanceCartridge manifest(buffer.data(), buffer.size());
+        if(!file::exists(gbaBiosPath))
+            return NO;
 
-        file::write({_interface->path(systemID), "manifest.bml"}, manifest.markup);
-        file::write({_interface->path(systemID), "program.rom"}, buffer);
+        _interface->loadMedia(romName, "Game Boy Advance", OEGameBoyAdvanceSystem, GameBoyAdvance::ID::GameBoyAdvance);
+        importGameBoyAdvance(_interface->path(GameBoyAdvance::ID::GameBoyAdvance), buffer);
+
+        file::copy(gbaBiosPath, {_interface->path(0), "bios.rom"});
     }
     else if([[self systemIdentifier] isEqualToString:@"openemu.system.gb"])
     {
-        GameBoyCartridge manifest(buffer.data(), buffer.size());
         string systemName = "Game Boy";
-        systemID = GameBoy::ID::GameBoy;
-        _interface->activeSystem = OEGameBoySystem;
+        unsigned mediaID = GameBoy::ID::GameBoy;
 
-        if(manifest.info.cgb || manifest.info.cgbonly)
+        if(checkGameBoyColorSupport(buffer))
         {
-            systemID = GameBoy::ID::GameBoyColor;
             systemName = "Game Boy Color";
+            mediaID = GameBoy::ID::GameBoyColor;
         }
 
-        _interface->loadMedia(romName, systemName, _interface->activeSystem, systemID);
-
-        file::write({_interface->path(systemID), "manifest.bml"}, manifest.markup);
-        file::write({_interface->path(systemID), "program.rom"}, buffer);
-
-        string sgbRomPath = {_interface->biosPath, "/Super Game Boy (World).sfc"};
-        string sgbBootRomPath = {_interface->biosPath, "/sgb.boot.rom"};
+        _interface->loadMedia(romName, systemName, OEGameBoySystem, mediaID);
+        importGameBoy(_interface->path(mediaID), buffer);
+/*
+        string sgbRomPath = {biosPath, "/Super Game Boy (World).sfc"};
+        string sgbBootRomPath = {biosPath, "/sgb.rom"};
         bool sgbAvailable = file::exists(sgbRomPath) && file::exists(sgbBootRomPath);
         
         // Check for Super Game Boy header
         if(sgbAvailable && (buffer[0x0146] & 0x03) == 0x03)
         {
             buffer = file::read(sgbRomPath);
-            systemID = SuperFamicom::ID::SuperFamicom;
-            systemName = "Super Famicom";
-            _interface->activeSystem = OESuperFamicomSystem;
-
-            SuperFamicomCartridge sgbManifest(buffer.data(), buffer.size());
-            _interface->loadMedia("Super Game Boy (World).sfc", systemName, _interface->activeSystem, systemID);
-
-            file::write({_interface->path(systemID), "manifest.bml"}, sgbManifest.markup);
-            file::write({_interface->path(systemID), "program.rom"}, buffer);
-            file::copy(sgbBootRomPath, {_interface->path(systemID), "sgb.boot.rom"});
+            
+            _interface->loadMedia("Super Game Boy (World).sfc", "Super Famicom", OESuperFamicomSystem, SuperFamicom::ID::SuperFamicom);
+            importSuperFamicom(_interface->path(SuperFamicom::ID::SuperFamicom), biosPath, buffer);
         }
+ */
     }
     else if([[self systemIdentifier] isEqualToString:@"openemu.system.nes"])
     {
-        systemID = Famicom::ID::Famicom;
-        _interface->activeSystem = OEFamicomSystem;
-        _interface->loadMedia(romName, "Famicom", _interface->activeSystem, systemID);
-
-        FamicomCartridge manifest(buffer.data(), buffer.size());
-
-        file::write({_interface->path(systemID), "manifest.bml"}, manifest.markup);
-        file::write({_interface->path(systemID), "program.rom"}, buffer.data() + 16, manifest.prgrom);
-        if(manifest.chrrom > 0)
-            file::write({_interface->path(systemID), "character.rom"}, buffer.data() + 16 + manifest.prgrom, manifest.chrrom);
+        _interface->loadMedia(romName, "Famicom", OEFamicomSystem, Famicom::ID::Famicom);
+        importFamicom(_interface->path(Famicom::ID::Famicom), buffer);
     }
 
     NSLog(@"Higan: Loading game");
-
-    _interface->load(systemID);
+    _interface->load();
 
     return YES;
 }
@@ -186,19 +146,7 @@
 {
     _interface->active->save();
 
-    // Clean-up
-    for(auto &path : _interface->pathname)
-    {
-        file::remove({path, "manifest.bml"});
-        file::remove({path, "program.rom"});
-        file::remove({path, "data.rom"});
-        file::remove({path, "sgb.boot.rom"});
-        file::remove({path, "character.rom"});
-
-        lstring contents = directory::contents(path);
-        if(contents.empty())
-            directory::remove(path);
-    }
+    cleanupLibrary(_interface->gamePaths);
 
     [super stopEmulation];
 }
