@@ -92,7 +92,7 @@
 
         _interface->loadMedia(romName, systemName, OEGameBoySystem, mediaID);
         importGameBoy(_interface->path(mediaID), buffer);
-/*
+
         string sgbRomPath = {biosPath, "/Super Game Boy (World).sfc"};
         string sgbBootRomPath = {biosPath, "/sgb.rom"};
         bool sgbAvailable = file::exists(sgbRomPath) && file::exists(sgbBootRomPath);
@@ -105,7 +105,6 @@
             _interface->loadMedia("Super Game Boy (World).sfc", "Super Famicom", OESuperFamicomSystem, SuperFamicom::ID::SuperFamicom);
             importSuperFamicom(_interface->path(SuperFamicom::ID::SuperFamicom), biosPath, buffer);
         }
- */
     }
     else if([[self systemIdentifier] isEqualToString:@"openemu.system.nes"])
     {
