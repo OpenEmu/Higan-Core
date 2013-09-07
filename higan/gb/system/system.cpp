@@ -46,7 +46,6 @@ void System::init() {
 
 void System::load(Revision revision) {
   this->revision = revision;
-  serialize_init();
   if(revision == Revision::SuperGameBoy) return;  //Super Famicom core loads boot ROM for SGB
 
   string manifest = string::read({interface->path(ID::System), "manifest.bml"});
@@ -68,6 +67,7 @@ void System::power() {
   ppu.power();
   apu.power();
   scheduler.init();
+  serialize_init();
 
   clocks_executed = 0;
 }
