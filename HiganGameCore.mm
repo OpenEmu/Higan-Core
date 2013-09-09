@@ -214,31 +214,39 @@
 
 #pragma mark - Save State
 
-- (BOOL)saveStateToFileAtPath:(NSString *)fileName
+- (void)saveStateToFileAtPath:(NSString *)fileName completionHandler:(void (^)(BOOL, NSError *))block
 {
     serializer state = _interface->active->serialize();
+    NSData *stateData = [NSData dataWithBytes:state.data() length:state.size()];
 
-    FILE  *saveStateFile = fopen([fileName UTF8String], "wb");
-    size_t bytesWritten  = fwrite(state.data(), sizeof(uint8_t), state.size(), saveStateFile);
+    __autoreleasing NSError *error = nil;
+    BOOL success = [stateData writeToFile:fileName options:NSDataWritingAtomic error:&error];
 
-    if(bytesWritten != state.size())
-    {
-        NSLog(@"Couldn't write save state");
-        return NO;
-    }
-
-    fclose(saveStateFile);
-    return YES;
+    block(success, success ? nil : error);
 }
 
-- (BOOL)loadStateFromFileAtPath:(NSString *)fileName
+- (void)loadStateFromFileAtPath:(NSString *)fileName completionHandler:(void (^)(BOOL, NSError *))block
 {
-    NSData *state = [NSData dataWithContentsOfFile:fileName];
+    __autoreleasing NSError *error = nil;
+    NSData *state = [NSData dataWithContentsOfFile:fileName options:NSDataReadingMappedIfSafe | NSDataReadingUncached error:&error];
+
+    if(state == nil)
+    {
+        block(NO, error);
+        return;
+    }
+
     serializer stateToLoad((const uint8_t *)[state bytes], [state length]);
+    if(!_interface->active->unserialize(stateToLoad))
+    {
+        // FIXME: Provide constants for error handling in OpenEmu SDK.
+        NSError *error = [NSError errorWithDomain:@"org.openemu.GameCore.Load" code:-10 userInfo:
+                          @{ NSLocalizedDescriptionKey : [NSString stringWithFormat:@"Could not read the file state in %@.", fileName] }];
+        block(NO, error);
+        return;
+    }
 
-    _interface->active->unserialize(stateToLoad);
-
-    return YES;
+    block(YES, nil);
 }
 
 #pragma mark - Input
