@@ -239,9 +239,10 @@
     serializer stateToLoad((const uint8_t *)[state bytes], [state length]);
     if(!_interface->active->unserialize(stateToLoad))
     {
-        // FIXME: Provide constants for error handling in OpenEmu SDK.
-        NSError *error = [NSError errorWithDomain:@"org.openemu.GameCore.Load" code:-10 userInfo:
-                          @{ NSLocalizedDescriptionKey : [NSString stringWithFormat:@"Could not read the file state in %@.", fileName] }];
+        NSError *error = [NSError errorWithDomain:OEGameCoreErrorDomain code:OEGameCoreCouldNotLoadStateError userInfo:@{
+            NSLocalizedDescriptionKey : @"The save state data could not be read",
+            NSLocalizedRecoverySuggestionErrorKey : [NSString stringWithFormat:@"Could not read the file state in %@.", fileName]
+        }];
         block(NO, error);
         return;
     }
