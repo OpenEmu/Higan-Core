@@ -26,6 +26,7 @@
  */
 
 #import <OpenEmuBase/OERingBuffer.h>
+#import <OpenGL/gl.h>
 
 #import "HiganGameCore.h"
 #import "HiganInterface.h"
