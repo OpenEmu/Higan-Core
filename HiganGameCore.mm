@@ -52,7 +52,7 @@
 
 #pragma mark - Execution
 
-- (BOOL)loadFileAtPath:(NSString *)path
+- (BOOL)loadFileAtPath:(NSString *)path error:(NSError **)error
 {
     _interface = new Interface;
 
