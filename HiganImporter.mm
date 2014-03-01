@@ -93,6 +93,7 @@ void importSuperFamicom(string path, string biosPath, vector<uint8_t> buffer)
     ^(const string &name, unsigned programSize, unsigned dataSize, unsigned bootSize)
     {
         //firmware stored in external file
+        if(!file::exists({biosPath, "/", name})) return;
         auto buffer = file::read({biosPath, "/", name});
         string basename = nall::basename(name);
         if(programSize) file::write({path, basename, ".program.rom"}, buffer.data(), programSize);
