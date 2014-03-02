@@ -24,6 +24,8 @@
 	<string>2</string>
 	<key>OEGameCoreRequiresFiles</key>
 	<true/>
+	<key>OEGameCoreSupportsCheatCode</key>
+	<true/>
 	<key>OEProjectURL</key>
 	<string>http://byuu.org/higan/</string>
 	<key>OESystemIdentifiers</key>

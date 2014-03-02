@@ -308,4 +308,26 @@ static const int inputMapFamicom [] = {4, 5, 6, 7, 0, 1, 3, 2};
     _interface->inputState[player - 1][inputMapFamicom[button]] = 0;
 }
 
+#pragma mark - Cheats
+
+NSMutableDictionary *cheatList = [[NSMutableDictionary alloc] init];
+
+- (void)setCheat:(NSString *)code setType:(NSString *)type setEnabled:(BOOL)enabled
+{
+    lstring list;
+    
+    if (enabled)
+        [cheatList setValue:@YES forKey:code];
+    else
+        [cheatList removeObjectForKey:code];
+    
+    for (id key in cheatList)
+    {
+        if ([[cheatList valueForKey:key] isEqual:@YES])
+            list.append([key UTF8String]);
+    }
+    
+    _interface->active->cheatSet(list);
+}
+
 @end
