@@ -89,19 +89,19 @@ void Interface::videoRefresh(const uint32_t* palette, const uint32_t* data, unsi
     width = w;
     height = h;
 
-//    if(activeSystem == OESuperFamicomSystem)
-//    {
-//        // Remove overscan
-//        data += 8 * pitch;
-//        if(height == 240)
-//        {
-//            height = 224;
-//        }
-//        else if(height == 480)
-//        {
-//            height = 448;
-//        }
-//    }
+    if(activeSystem == OESuperFamicomSystem)
+    {
+        // Remove overscan
+        data += 8 * pitch;
+        if(height == 240)
+        {
+            height = 224;
+        }
+        else if(height == 480)
+        {
+            height = 448;
+        }
+    }
 
     for(unsigned y = 0; y < height; y++)
     {
