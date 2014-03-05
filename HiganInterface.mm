@@ -75,37 +75,43 @@ void Interface::saveRequest(unsigned id, string path)
     active->save(id, stream);
 }
 
-uint32_t Interface::videoColor(unsigned source, uint16_t r, uint16_t g, uint16_t b)
+uint32_t Interface::videoColor(unsigned source, uint16_t a, uint16_t r, uint16_t g, uint16_t b)
 {
-    r >>= 8, g >>= 8, b >>= 8;
-    return r << 16 | g << 8 | b << 0;
+    a >>= 8, r >>= 8, g >>= 8, b >>= 8;
+    return a << 24 | r << 16 | g << 8 | b << 0;
 }
 
-void Interface::videoRefresh(const uint32_t* data, unsigned pitch, unsigned newWidth, unsigned newHeight)
+void Interface::videoRefresh(const uint32_t* palette, const uint32_t* data, unsigned pitch, unsigned w, unsigned h)
 {
+    unsigned outputPitch = 512;
     pitch >>= 2;
 
-    width  = newWidth;
-    height = newHeight;
+    width = w;
+    height = h;
 
-    if(activeSystem == OESuperFamicomSystem)
+//    if(activeSystem == OESuperFamicomSystem)
+//    {
+//        // Remove overscan
+//        data += 8 * pitch;
+//        if(height == 240)
+//        {
+//            height = 224;
+//        }
+//        else if(height == 480)
+//        {
+//            height = 448;
+//        }
+//    }
+
+    for(unsigned y = 0; y < height; y++)
     {
-        // Remove overscan
-        data += 8 * pitch;
-        if(height == 240)
-            height = 224;
-        else if(height == 480)
-            height = 448;
+        const uint32_t* sp = data + y * pitch;
+        uint32_t* dp = videoBuffer + y * outputPitch;
+        for(unsigned x = 0; x < width; x++)
+        {
+            *dp++ = palette[*sp++];
+        }
     }
-
-    dispatch_queue_t the_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_apply(height, the_queue, ^(size_t y)
-    {
-        const uint32_t *src = (uint32_t*)data + y * pitch;
-        uint32_t *dst = videoBuffer + y * 512;
-
-        memcpy(dst, src, sizeof(uint32_t)*width);
-    });
 }
 
 void Interface::audioSample(int16_t lsample, int16_t rsample)
@@ -157,7 +163,7 @@ void Interface::load()
     active->load(mediaID);
     active->power();
 
-    active->paletteUpdate();
+    active->paletteUpdate(Emulator::Interface::PaletteMode::Emulation);
     initializeResampler();
 
     run();

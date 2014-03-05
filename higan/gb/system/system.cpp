@@ -11,7 +11,7 @@ void System::run() {
 
   scheduler.enter();
   if(scheduler.exit_reason() == Scheduler::ExitReason::FrameEvent) {
-    interface->videoRefresh(ppu.screen, 4 * 160, 160, 144);
+    interface->videoRefresh(video.palette, ppu.screen, 4 * 160, 160, 144);
   }
 }
 
@@ -35,7 +35,7 @@ void System::runthreadtosave() {
     scheduler.enter();
     if(scheduler.exit_reason() == Scheduler::ExitReason::SynchronizeEvent) break;
     if(scheduler.exit_reason() == Scheduler::ExitReason::FrameEvent) {
-      interface->videoRefresh(ppu.screen, 4 * 160, 160, 144);
+      interface->videoRefresh(video.palette, ppu.screen, 4 * 160, 160, 144);
     }
   }
 }
@@ -46,6 +46,7 @@ void System::init() {
 
 void System::load(Revision revision) {
   this->revision = revision;
+  serialize_init();
   if(revision == Revision::SuperGameBoy) return;  //Super Famicom core loads boot ROM for SGB
 
   string manifest = string::read({interface->path(ID::System), "manifest.bml"});
@@ -67,7 +68,6 @@ void System::power() {
   ppu.power();
   apu.power();
   scheduler.init();
-  serialize_init();
 
   clocks_executed = 0;
 }
