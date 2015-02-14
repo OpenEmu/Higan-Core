@@ -22,36 +22,6 @@
 	<string>HiganGameCore</string>
 	<key>OEGameCoreOptions</key>
 	<dict>
-		<key>openemu.system.gb</key>
-		<dict>
-			<key>OEGameCoreSupportsCheatCode</key>
-			<true/>
-		</dict>
-		<key>openemu.system.gba</key>
-		<dict>
-			<key>OEGameCoreRequiresFiles</key>
-			<true/>
-			<key>OEGameCoreSupportsCheatCode</key>
-			<true/>
-			<key>OERequiredFiles</key>
-			<array>
-				<dict>
-					<key>Description</key>
-					<string>Game Boy Advance BIOS</string>
-					<key>MD5</key>
-					<string>a860e8c0b6d573d191e4ec7db1b1e4f6</string>
-					<key>Name</key>
-					<string>bios.rom</string>
-					<key>Size</key>
-					<integer>16384</integer>
-				</dict>
-			</array>
-		</dict>
-		<key>openemu.system.nes</key>
-		<dict>
-			<key>OEGameCoreSupportsCheatCode</key>
-			<true/>
-		</dict>
 		<key>openemu.system.snes</key>
 		<dict>
 			<key>OEGameCoreRequiresFiles</key>
@@ -178,9 +148,6 @@
 	<key>OESystemIdentifiers</key>
 	<array>
 		<string>openemu.system.snes</string>
-		<string>openemu.system.gba</string>
-		<string>openemu.system.gb</string>
-		<string>openemu.system.nes</string>
 	</array>
 	<key>SUEnableAutomaticChecks</key>
 	<string>1</string>
