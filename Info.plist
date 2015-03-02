@@ -24,6 +24,12 @@
 	<dict>
 		<key>openemu.system.snes</key>
 		<dict>
+			<key>OEGameCoreRewindBufferSeconds</key>
+			<integer>1200</integer>
+			<key>OEGameCoreRewindInterval</key>
+			<integer>0</integer>
+			<key>OEGameCoreSupportsRewinding</key>
+			<true/>
 			<key>OEGameCoreRequiresFiles</key>
 			<true/>
 			<key>OEGameCoreSupportsCheatCode</key>
