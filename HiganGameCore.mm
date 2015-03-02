@@ -217,40 +217,32 @@
 
 #pragma mark - Save State
 
-- (void)saveStateToFileAtPath:(NSString *)fileName completionHandler:(void (^)(BOOL, NSError *))block
+- (NSData *)serializeStateWithError:(NSError **)outError
 {
     serializer state = _interface->active->serialize();
-    NSData *stateData = [NSData dataWithBytes:state.data() length:state.size()];
-
-    __autoreleasing NSError *error = nil;
-    BOOL success = [stateData writeToFile:fileName options:NSDataWritingAtomic error:&error];
-
-    block(success, success ? nil : error);
+    return [NSData dataWithBytes:state.data() length:state.size()];
 }
 
-- (void)loadStateFromFileAtPath:(NSString *)fileName completionHandler:(void (^)(BOOL, NSError *))block
+- (BOOL)deserializeState:(NSData *)state withError:(NSError **)outError
 {
-    __autoreleasing NSError *error = nil;
-    NSData *state = [NSData dataWithContentsOfFile:fileName options:NSDataReadingMappedIfSafe | NSDataReadingUncached error:&error];
-
-    if(state == nil)
-    {
-        block(NO, error);
-        return;
-    }
-
-    serializer stateToLoad((const uint8_t *)[state bytes], [state length]);
+    const uint8_t *stateBytes = (const uint8_t *)[state bytes];
+    unsigned int stateLength = [state length];
+    serializer stateToLoad(stateBytes, stateLength);
+    
     if(!_interface->active->unserialize(stateToLoad))
     {
-        NSError *error = [NSError errorWithDomain:OEGameCoreErrorDomain code:OEGameCoreCouldNotLoadStateError userInfo:@{
-            NSLocalizedDescriptionKey : @"The save state data could not be read",
-            NSLocalizedRecoverySuggestionErrorKey : [NSString stringWithFormat:@"Could not read the file state in %@.", fileName]
-        }];
-        block(NO, error);
-        return;
+        NSError *error = [NSError errorWithDomain:OEGameCoreErrorDomain
+                                             code:OEGameCoreCouldNotLoadStateError
+                                         userInfo:@{
+                                                    NSLocalizedDescriptionKey : @"The save state data could not be read"
+                                                    }];
+        if(outError)
+        {
+            *outError = error;
+        }
+        return NO;
     }
-
-    block(YES, nil);
+    return YES;
 }
 
 #pragma mark - Input
