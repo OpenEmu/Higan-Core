@@ -245,6 +245,42 @@
     return YES;
 }
 
+- (void)saveStateToFileAtPath:(NSString *)fileName completionHandler:(void (^)(BOOL, NSError *))block
+{
+    serializer state = _interface->active->serialize();
+    NSData *stateData = [NSData dataWithBytes:state.data() length:state.size()];
+    
+    __autoreleasing NSError *error = nil;
+    BOOL success = [stateData writeToFile:fileName options:NSDataWritingAtomic error:&error];
+    
+    block(success, success ? nil : error);
+}
+
+- (void)loadStateFromFileAtPath:(NSString *)fileName completionHandler:(void (^)(BOOL, NSError *))block
+{
+    __autoreleasing NSError *error = nil;
+    NSData *state = [NSData dataWithContentsOfFile:fileName options:NSDataReadingMappedIfSafe | NSDataReadingUncached error:&error];
+    
+    if(state == nil)
+    {
+        block(NO, error);
+        return;
+    }
+    
+    serializer stateToLoad((const uint8_t *)[state bytes], [state length]);
+    if(!_interface->active->unserialize(stateToLoad))
+    {
+        NSError *error = [NSError errorWithDomain:OEGameCoreErrorDomain code:OEGameCoreCouldNotLoadStateError userInfo:@{
+                                                                                                                         NSLocalizedDescriptionKey : @"The save state data could not be read",
+                                                                                                                         NSLocalizedRecoverySuggestionErrorKey : [NSString stringWithFormat:@"Could not read the file state in %@.", fileName]
+                                                                                                                         }];
+        block(NO, error);
+        return;
+    }
+    
+    block(YES, nil);
+}
+
 #pragma mark - Input
 
 static const int inputMapSuperFamicom [] = {4, 5, 6, 7, 8, 0, 9, 1,10, 11, 3, 2};
