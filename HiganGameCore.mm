@@ -338,6 +338,26 @@ static const int inputMapFamicom [] = {4, 5, 6, 7, 0, 1, 3, 2};
     _interface->inputState[player - 1][inputMapFamicom[button]] = 0;
 }
 
+- (oneway void)mouseMovedAtPoint:(OEIntPoint)aPoint
+{
+}
+
+- (oneway void)leftMouseDownAtPoint:(OEIntPoint)aPoint
+{
+}
+
+- (oneway void)leftMouseUp
+{
+}
+
+- (oneway void)rightMouseDownAtPoint:(OEIntPoint)aPoint
+{
+}
+
+- (oneway void)rightMouseUp
+{
+}
+
 #pragma mark - Cheats
 
 NSMutableDictionary *cheatList = [[NSMutableDictionary alloc] init];
