@@ -164,7 +164,7 @@
         case OEGameBoySystem:
             return OEIntSizeMake(10, 9);
         default:
-            return OEIntSizeMake(4, 3);
+            return OEIntSizeMake(256 * (8.0/7.0), _interface->height);
     }
 }
 
