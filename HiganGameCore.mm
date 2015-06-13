@@ -67,6 +67,19 @@
     {
         _interface->loadMedia(romName, "Super Famicom", OESuperFamicomSystem, SuperFamicom::ID::SuperFamicom);
         importSuperFamicom(_interface->path(SuperFamicom::ID::SuperFamicom), biosPath, buffer);
+
+        string checkChip = checkMissingChipDump();
+        if(!checkChip.empty())
+        {
+            NSString *missingFileName = [NSString stringWithUTF8String:checkChip];
+
+            NSError *outErr = [NSError errorWithDomain:OEGameCoreErrorDomain code:OEGameCoreCouldNotLoadROMError userInfo:@{
+                NSLocalizedDescriptionKey : @"Required chip dump file missing.",
+                NSLocalizedRecoverySuggestionErrorKey : [NSString stringWithFormat:@"To run this game you need: \"%@\"\n\nObtain this file, drag and drop onto the game library window and try again.", missingFileName]
+            }];
+            *error = outErr;
+            return NO;
+        }
     }
     else if([[self systemIdentifier] isEqualToString:@"openemu.system.gba"])
     {

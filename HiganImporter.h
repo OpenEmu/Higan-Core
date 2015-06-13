@@ -37,3 +37,5 @@ void cleanupLibrary(lstring paths);
 
 // Returns 0 for GB games, 1 for CGB/GB games, 2 for CGB exclusive games
 unsigned checkGameBoyColorSupport(vector<uint8_t> buffer);
+
+string checkMissingChipDump();

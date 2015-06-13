@@ -34,6 +34,8 @@
 #include "ananke/heuristics/game-boy.hpp"
 #include "ananke/heuristics/super-famicom.hpp"
 
+string missingChipDumpFileName = "";
+
 void importFamicom(string path, vector<uint8_t> buffer)
 {
     FamicomCartridge manifest(buffer.data(), buffer.size());
@@ -93,7 +95,11 @@ void importSuperFamicom(string path, string biosPath, vector<uint8_t> buffer)
     ^(const string &name, unsigned programSize, unsigned dataSize, unsigned bootSize)
     {
         //firmware stored in external file
-        if(!file::exists({biosPath, "/", name})) return;
+        if(!file::exists({biosPath, "/", name}))
+        {
+            missingChipDumpFileName = name;
+            return;
+        }
         auto buffer = file::read({biosPath, "/", name});
         string basename = nall::basename(name);
         if(programSize) file::write({path, basename, ".program.rom"}, buffer.data(), programSize);
@@ -157,4 +163,9 @@ unsigned checkGameBoyColorSupport(vector<uint8_t> buffer)
     if((buffer[0x0143] & 0x80) == 0x80) return 1;
     // GB vanilla
     return 0;
+}
+
+string checkMissingChipDump()
+{
+    return missingChipDumpFileName;
 }
