@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.openemu.${PRODUCT_NAME:identifier}</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>
@@ -24,15 +24,15 @@
 	<dict>
 		<key>openemu.system.snes</key>
 		<dict>
+			<key>OEGameCoreRequiresFiles</key>
+			<true/>
 			<key>OEGameCoreRewindBufferSeconds</key>
 			<integer>1200</integer>
 			<key>OEGameCoreRewindInterval</key>
 			<integer>0</integer>
-			<key>OEGameCoreSupportsRewinding</key>
-			<true/>
-			<key>OEGameCoreRequiresFiles</key>
-			<true/>
 			<key>OEGameCoreSupportsCheatCode</key>
+			<true/>
+			<key>OEGameCoreSupportsRewinding</key>
 			<true/>
 			<key>OERequiredFiles</key>
 			<array>
