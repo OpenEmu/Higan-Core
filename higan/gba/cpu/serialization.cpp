@@ -1,4 +1,4 @@
-void CPU::serialize(serializer& s) {
+auto CPU::serialize(serializer& s) -> void {
   ARM::serialize(s);
   Thread::serialize(s);
 
@@ -25,6 +25,7 @@ void CPU::serialize(serializer& s) {
   for(auto& timer : regs.timer) {
     s.integer(timer.period);
     s.integer(timer.reload);
+    s.integer(timer.pending);
     s.integer(timer.control.frequency);
     s.integer(timer.control.cascade);
     s.integer(timer.control.irq);

@@ -76,7 +76,8 @@
             NSError *outErr = [NSError errorWithDomain:OEGameCoreErrorDomain code:OEGameCoreCouldNotLoadROMError userInfo:@{
                 NSLocalizedDescriptionKey : @"Required chip dump file missing.",
                 NSLocalizedRecoverySuggestionErrorKey : [NSString stringWithFormat:@"To run this game you need: \"%@\"\n\nObtain this file, drag and drop onto the game library window and try again.", missingFileName]
-            }];
+                }];
+
             *error = outErr;
             return NO;
         }
@@ -86,7 +87,16 @@
         string gbaBiosPath = {biosPath, "/bios.rom"};
 
         if(!file::exists(gbaBiosPath))
+        {
+            NSError *outErr = [NSError errorWithDomain:OEGameCoreErrorDomain code:OEGameCoreCouldNotLoadROMError userInfo:@{
+                NSLocalizedDescriptionKey : @"GBA BIOS file is missing.",
+                NSLocalizedRecoverySuggestionErrorKey : @"To run this game you need: \"bios.rom\"\n\nObtain this file, drag and drop onto the game library window and try again."
+                }];
+
+            *error = outErr;
             return NO;
+        }
+
 
         _interface->loadMedia(romName, "Game Boy Advance", OEGameBoyAdvanceSystem, GameBoyAdvance::ID::GameBoyAdvance);
         importGameBoyAdvance(_interface->path(GameBoyAdvance::ID::GameBoyAdvance), buffer);
@@ -368,6 +378,14 @@ static const int inputMapFamicom [] = {4, 5, 6, 7, 0, 1, 3, 2};
 }
 
 - (oneway void)rightMouseUp
+{
+}
+
+- (oneway void)didTriggerGunAtPoint:(OEIntPoint)point
+{
+}
+
+- (oneway void)didReleaseTrigger
 {
 }
 

@@ -32,7 +32,7 @@ void SA1::enter() {
       continue;
     }
 
-    (this->*opcode_table[op_readpc()])();
+    op_exec();
   }
 }
 
@@ -107,7 +107,7 @@ void SA1::tick() {
   case 0: break;
   case 1: if(status.hcounter == (mmio.hcnt << 2)) trigger_irq(); break;
   case 2: if(status.vcounter == mmio.vcnt && status.hcounter == 0) trigger_irq(); break;
-  case 3: if(status.vcounter == mmio.hcnt && status.hcounter == (mmio.hcnt << 2)) trigger_irq(); break;
+  case 3: if(status.vcounter == mmio.vcnt && status.hcounter == (mmio.hcnt << 2)) trigger_irq(); break;
   }
 }
 
@@ -152,7 +152,6 @@ void SA1::reset() {
   regs.mdr    = 0x00;
   regs.wai    = false;
   regs.vector = 0x0000;
-  R65816::update_table();
 
   status.tick_counter = 0;
 

@@ -5,13 +5,50 @@ namespace SuperFamicom {
 
 Bus bus;
 
-void Bus::map(
+Bus::Bus() {
+  lookup = new uint8 [16 * 1024 * 1024];
+  target = new uint32[16 * 1024 * 1024];
+}
+
+Bus::~Bus() {
+  delete[] lookup;
+  delete[] target;
+}
+
+auto Bus::reset() -> void {
+  function<uint8 (unsigned)> reader = [](unsigned) { return cpu.regs.mdr; };
+  function<void (unsigned, uint8)> writer = [](unsigned, uint8) {};
+
+  idcount = 0;
+  map(reader, writer, 0x00, 0xff, 0x0000, 0xffff);
+}
+
+auto Bus::map() -> void {
+  for(auto& m : cartridge.mapping) {
+    lstring part = m.addr.split(":", 1L);
+    lstring banks = part(0).split(",");
+    lstring addrs = part(1).split(",");
+    for(auto& bank : banks) {
+      for(auto& addr : addrs) {
+        lstring bankpart = bank.split("-", 1L);
+        lstring addrpart = addr.split("-", 1L);
+        unsigned banklo = hex(bankpart(0));
+        unsigned bankhi = hex(bankpart(1, bankpart(0)));
+        unsigned addrlo = hex(addrpart(0));
+        unsigned addrhi = hex(addrpart(1, addrpart(0)));
+        map(m.reader, m.writer, banklo, bankhi, addrlo, addrhi, m.size, m.base, m.mask);
+      }
+    }
+  }
+}
+
+auto Bus::map(
   const function<uint8 (unsigned)>& reader,
   const function<void (unsigned, uint8)>& writer,
   unsigned banklo, unsigned bankhi,
   unsigned addrlo, unsigned addrhi,
   unsigned size, unsigned base, unsigned mask
-) {
+) -> void {
   assert(banklo <= bankhi && banklo <= 0xff);
   assert(addrlo <= addrhi && addrlo <= 0xffff);
   assert(idcount < 255);
@@ -28,43 +65,6 @@ void Bus::map(
       target[bank << 16 | addr] = offset;
     }
   }
-}
-
-void Bus::map_reset() {
-  function<uint8 (unsigned)> reader = [](unsigned) { return cpu.regs.mdr; };
-  function<void (unsigned, uint8)> writer = [](unsigned, uint8) {};
-
-  idcount = 0;
-  map(reader, writer, 0x00, 0xff, 0x0000, 0xffff);
-}
-
-void Bus::map_xml() {
-  for(auto& m : cartridge.mapping) {
-    lstring part = m.addr.split<1>(":");
-    lstring banks = part(0).split(",");
-    lstring addrs = part(1).split(",");
-    for(auto& bank : banks) {
-      for(auto& addr : addrs) {
-        lstring bankpart = bank.split<1>("-");
-        lstring addrpart = addr.split<1>("-");
-        unsigned banklo = hex(bankpart(0));
-        unsigned bankhi = hex(bankpart(1, bankpart(0)));
-        unsigned addrlo = hex(addrpart(0));
-        unsigned addrhi = hex(addrpart(1, addrpart(0)));
-        map(m.reader, m.writer, banklo, bankhi, addrlo, addrhi, m.size, m.base, m.mask);
-      }
-    }
-  }
-}
-
-Bus::Bus() {
-  lookup = new uint8 [16 * 1024 * 1024];
-  target = new uint32[16 * 1024 * 1024];
-}
-
-Bus::~Bus() {
-  delete[] lookup;
-  delete[] target;
 }
 
 }

@@ -48,7 +48,7 @@ privileged:
   Screen screen;
 
   static void Enter();
-  void add_clocks(unsigned);
+  alwaysinline void add_clocks(unsigned);
 
   void scanline();
   void frame();
@@ -60,9 +60,9 @@ privileged:
   friend class Video;
 
   struct Debugger {
-    hook<void (uint16)> vram_read;
-    hook<void (uint16)> oam_read;
-    hook<void (uint16)> cgram_read;
+    hook<void (uint16, uint8)> vram_read;
+    hook<void (uint16, uint8)> oam_read;
+    hook<void (uint16, uint8)> cgram_read;
     hook<void (uint16, uint8)> vram_write;
     hook<void (uint16, uint8)> oam_write;
     hook<void (uint16, uint8)> cgram_write;

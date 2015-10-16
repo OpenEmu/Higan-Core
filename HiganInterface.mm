@@ -46,13 +46,13 @@ Interface::~Interface()
     delete [] videoBuffer;
 }
 
-void Interface::loadRequest(unsigned id, string name, string type)
+void Interface::loadRequest(unsigned id, string name, string type, bool required)
 {
     paths(id) = gamePaths(0);
     active->load(id);
 }
 
-void Interface::loadRequest(unsigned id, string path)
+void Interface::loadRequest(unsigned id, string path, bool required)
 {
     NSLog(@"Loading file \"%s\"", path.data());
 
@@ -161,10 +161,11 @@ void Interface::loadMedia(string path, string systemName, OESystemIndex emulator
 void Interface::load()
 {
     active->load(mediaID);
-    active->power();
 
     active->paletteUpdate(Emulator::Interface::PaletteMode::Emulation);
     initializeResampler();
+
+    active->power();
 
     run();
 }

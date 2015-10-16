@@ -86,13 +86,7 @@ void CPU::enter() {
 
 void CPU::op_step() {
   debugger.op_exec(regs.pc.d);
-  if(interface->tracer.open()) {
-    char text[4096];
-    disassemble_opcode(text, regs.pc.d);
-    interface->tracer.print(text, "\n");
-  }
-
-  (this->*opcode_table[op_readpc()])();
+  op_exec();
 }
 
 void CPU::enable() {
@@ -147,7 +141,6 @@ void CPU::reset() {
   regs.mdr    = 0x00;
   regs.wai    = false;
   regs.vector = 0xfffc;  //reset vector address
-  update_table();
 
   mmio_reset();
   dma_reset();

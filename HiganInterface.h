@@ -25,7 +25,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <phoenix/cocoa/header.hpp>
+#include <hiro/cocoa/header.hpp>
 #include <emulator/emulator.hpp>
 #include <nall/dsp.hpp>
 
@@ -45,8 +45,8 @@ typedef enum OESystemIndex : NSUInteger
 } OESystemIndex;
 
 struct Interface : Emulator::Interface::Bind {
-    void loadRequest(unsigned id, string name, string type);
-    void loadRequest(unsigned id, string path);
+    void loadRequest(unsigned id, string name, string type, bool required);
+    void loadRequest(unsigned id, string path, bool required);
     void saveRequest(unsigned id, string path);
     uint32_t videoColor(unsigned source, uint16_t alpha, uint16_t red, uint16_t green, uint16_t blue);
     void videoRefresh(const uint32_t* palette, const uint32_t* data, unsigned pitch, unsigned width, unsigned height);

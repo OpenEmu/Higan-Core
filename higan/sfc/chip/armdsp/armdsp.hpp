@@ -1,4 +1,4 @@
-//ARMv3 (ARM6)
+//ARMv3 (ARM60)
 
 struct ArmDSP : Processor::ARM, Coprocessor {
   uint8* programROM;
@@ -10,10 +10,10 @@ struct ArmDSP : Processor::ARM, Coprocessor {
   static void Enter();
   void enter();
 
-  void step(unsigned clocks);
-  void bus_idle(uint32 addr);
-  uint32 bus_read(uint32 addr, uint32 size);
-  void bus_write(uint32 addr, uint32 size, uint32 word);
+  void step(unsigned clocks) override;
+  void bus_idle() override;
+  uint32 bus_read(unsigned mode, uint32 addr) override;
+  void bus_write(unsigned mode, uint32 addr, uint32 word) override;
 
   uint8 mmio_read(unsigned addr);
   void mmio_write(unsigned addr, uint8 data);

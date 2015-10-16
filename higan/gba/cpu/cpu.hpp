@@ -1,43 +1,57 @@
 struct CPU : Processor::ARM, Thread, MMIO {
-  uint8* iwram;
-  uint8* ewram;
+  using ARM::read;
+  using ARM::write;
+
+  uint8* iwram = nullptr;
+  uint8* ewram = nullptr;
   #include "registers.hpp"
+  #include "prefetch.hpp"
   #include "state.hpp"
 
-  static void Enter();
-  void main();
-  void step(unsigned clocks);
-  void sync_step(unsigned clocks);
+  //cpu.cpp
+  static auto Enter() -> void;
 
-  void bus_idle(uint32 addr);
-  uint32 bus_read(uint32 addr, uint32 size);
-  void bus_write(uint32 addr, uint32 size, uint32 word);
+  auto main() -> void;
 
-  void keypad_run();
-  void power();
+  auto step(unsigned clocks) -> void override;
 
-  uint8 read(uint32 addr);
-  void write(uint32 addr, uint8 byte);
+  auto sync_step(unsigned clocks) -> void;
+  auto keypad_run() -> void;
+  auto power() -> void;
 
-  uint32 iwram_read(uint32 addr, uint32 size);
-  void iwram_write(uint32 addr, uint32 size, uint32 word);
-
-  uint32 ewram_read(uint32 addr, uint32 size);
-  void ewram_write(uint32 addr, uint32 size, uint32 word);
-
-  void dma_run();
-  void dma_transfer(Registers::DMA &dma);
-  void dma_vblank();
-  void dma_hblank();
-  void dma_hdma();
-
-  void timer_step(unsigned clocks);
-  void timer_increment(unsigned n);
-  void timer_fifo_run(unsigned n);
-
-  void serialize(serializer&);
   CPU();
   ~CPU();
+
+  //bus.cpp
+  auto bus_idle() -> void override;
+  auto bus_read(unsigned mode, uint32 addr) -> uint32 override;
+  auto bus_write(unsigned mode, uint32 addr, uint32 word) -> void override;
+  auto bus_wait(unsigned mode, uint32 addr) -> unsigned;
+
+  //mmio.cpp
+  auto read(uint32 addr) -> uint8;
+  auto write(uint32 addr, uint8 byte) -> void;
+
+  auto iwram_read(unsigned mode, uint32 addr) -> uint32;
+  auto iwram_write(unsigned mode, uint32 addr, uint32 word) -> void;
+
+  auto ewram_read(unsigned mode, uint32 addr) -> uint32;
+  auto ewram_write(unsigned mode, uint32 addr, uint32 word) -> void;
+
+  //dma.cpp
+  auto dma_run() -> void;
+  auto dma_exec(Registers::DMA& dma) -> void;
+  auto dma_vblank() -> void;
+  auto dma_hblank() -> void;
+  auto dma_hdma() -> void;
+
+  //timer.cpp
+  auto timer_step(unsigned clocks) -> void;
+  auto timer_increment(unsigned n) -> void;
+  auto timer_fifo_run(unsigned n) -> void;
+
+  //serialization.cpp
+  auto serialize(serializer&) -> void;
 };
 
 extern CPU cpu;

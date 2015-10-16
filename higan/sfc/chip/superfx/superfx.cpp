@@ -13,9 +13,11 @@ namespace SuperFamicom {
 
 SuperFX superfx;
 
-void SuperFX::Enter() { superfx.enter(); }
+auto SuperFX::Enter() -> void {
+  superfx.enter();
+}
 
-void SuperFX::enter() {
+auto SuperFX::enter() -> void {
   while(true) {
     if(scheduler.sync == Scheduler::SynchronizeMode::All) {
       scheduler.exit(Scheduler::ExitReason::SynchronizeEvent);
@@ -23,42 +25,36 @@ void SuperFX::enter() {
 
     if(regs.sfr.g == 0) {
       step(6);
-      synchronize_cpu();
       continue;
     }
 
-    (this->*opcode_table[(regs.sfr & 0x0300) + peekpipe()])();
-    if(r15_modified == false) regs.r[15]++;
-
-    if(++instruction_counter >= 128) {
-      instruction_counter = 0;
-      synchronize_cpu();
-    }
+    unsigned opcode = regs.sfr.alt2 << 9 | regs.sfr.alt1 << 8 | peekpipe();
+    (this->*opcode_table[opcode])();
+    if(!r15_modified) regs.r[15]++;
   }
 }
 
-void SuperFX::init() {
+auto SuperFX::init() -> void {
   initialize_opcode_table();
   regs.r[14].modify = {&SuperFX::r14_modify, this};
   regs.r[15].modify = {&SuperFX::r15_modify, this};
 }
 
-void SuperFX::load() {
+auto SuperFX::load() -> void {
 }
 
-void SuperFX::unload() {
+auto SuperFX::unload() -> void {
   rom.reset();
   ram.reset();
 }
 
-void SuperFX::power() {
+auto SuperFX::power() -> void {
   GSU::power();
 }
 
-void SuperFX::reset() {
+auto SuperFX::reset() -> void {
   GSU::reset();
   create(SuperFX::Enter, system.cpu_frequency());
-  instruction_counter = 0;
   memory_reset();
   timing_reset();
 }

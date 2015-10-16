@@ -42,8 +42,8 @@ void System::runthreadtosave() {
 }
 
 void System::load() {
-  string manifest = string::read({interface->path(ID::System), "manifest.bml"});
-  auto document = Markup::Document(manifest);
+  interface->loadRequest(ID::SystemManifest, "manifest.bml", true);
+  auto document = BML::unserialize(information.manifest);
 
   serialize_init();
 }

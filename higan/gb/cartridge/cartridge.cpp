@@ -25,7 +25,7 @@ void Cartridge::load_empty(System::Revision revision) {
   romdata = allocate<uint8>(romsize, 0xff);
   ramsize = 0;
   mapper = &mbc0;
-  sha256 = nall::sha256(romdata, romsize);
+  sha256 = Hash::SHA256(romdata, romsize).digest();
   loaded = true;
   system.load(revision);
 }
@@ -35,7 +35,7 @@ void Cartridge::load(System::Revision revision) {
 
   system.revision = revision;  //needed for ID::Manifest to return correct group ID
   if(revision != System::Revision::SuperGameBoy) {
-    interface->loadRequest(ID::Manifest, "manifest.bml");
+    interface->loadRequest(ID::Manifest, "manifest.bml", true);
   }
 
   information.mapper = Mapper::Unknown;
@@ -47,7 +47,7 @@ void Cartridge::load(System::Revision revision) {
   information.romsize = 0;
   information.ramsize = 0;
 
-  auto document = Markup::Document(information.markup);
+  auto document = BML::unserialize(information.markup);
   information.title = document["information/title"].text();
 
   auto mapperid = document["cartridge/board/type"].text();
@@ -66,22 +66,22 @@ void Cartridge::load(System::Revision revision) {
   auto rom = document["cartridge/rom"];
   auto ram = document["cartridge/ram"];
 
-  romsize = numeral(rom["size"].data);
+  romsize = rom["size"].decimal();
   romdata = allocate<uint8>(romsize, 0xff);
 
-  ramsize = numeral(ram["size"].data);
+  ramsize = ram["size"].decimal();
   ramdata = allocate<uint8>(ramsize, 0xff);
 
   //Super Game Boy core loads memory from Super Famicom core
   if(revision != System::Revision::SuperGameBoy) {
-    if(rom["name"].exists()) interface->loadRequest(ID::ROM, rom["name"].data);
-    if(ram["name"].exists()) interface->loadRequest(ID::RAM, ram["name"].data);
-    if(ram["name"].exists()) memory.append({ID::RAM, ram["name"].data});
+    if(auto name = rom["name"].text()) interface->loadRequest(ID::ROM, name, true);
+    if(auto name = ram["name"].text()) interface->loadRequest(ID::RAM, name, false);
+    if(auto name = ram["name"].text()) memory.append({ID::RAM, name});
   }
 
-  information.romsize = numeral(rom["size"].data);
-  information.ramsize = numeral(ram["size"].data);
-  information.battery = ram["name"].exists();
+  information.romsize = rom["size"].decimal();
+  information.ramsize = ram["size"].decimal();
+  information.battery = (bool)ram["name"];
 
   switch(information.mapper) { default:
   case Mapper::MBC0:  mapper = &mbc0;  break;
@@ -94,7 +94,7 @@ void Cartridge::load(System::Revision revision) {
   case Mapper::HuC3:  mapper = &huc3;  break;
   }
 
-  sha256 = nall::sha256(romdata, romsize);
+  sha256 = Hash::SHA256(romdata, romsize).digest();
   loaded = true;
   system.load(revision);
 }

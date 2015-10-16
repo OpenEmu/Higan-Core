@@ -29,10 +29,10 @@
 
 #include <nall/file.hpp>
 
-#include "ananke/heuristics/famicom.hpp"
-#include "ananke/heuristics/game-boy-advance.hpp"
-#include "ananke/heuristics/game-boy.hpp"
-#include "ananke/heuristics/super-famicom.hpp"
+#include "icarus/heuristics/famicom.hpp"
+#include "icarus/heuristics/game-boy-advance.hpp"
+#include "icarus/heuristics/game-boy.hpp"
+#include "icarus/heuristics/super-famicom.hpp"
 
 string missingChipDumpFileName = "";
 
