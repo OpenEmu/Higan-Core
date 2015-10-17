@@ -46,9 +46,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		8C1B4D071BC86FF80099D506 /* GNUmakefile in Resources */ = {isa = PBXBuildFile; fileRef = 8C1B4C8B1BC86FF80099D506 /* GNUmakefile */; settings = {ASSET_TAGS = (); }; };
-		8C1B50491BC872060099D506 /* mcc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50461BC872060099D506 /* mcc.cpp */; settings = {ASSET_TAGS = (); }; };
-		8C1B504A1BC872060099D506 /* serialization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50481BC872060099D506 /* serialization.cpp */; settings = {ASSET_TAGS = (); }; };
+		8C1B50491BC872060099D506 /* mcc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50461BC872060099D506 /* mcc.cpp */; };
+		8C1B504A1BC872060099D506 /* serialization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50481BC872060099D506 /* serialization.cpp */; };
 		8CA9071F17A84F72001591B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA9071E17A84F72001591B7 /* Cocoa.framework */; };
 		8CA9072917A84F72001591B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8CA9072717A84F72001591B7 /* InfoPlist.strings */; };
 		8CAD01C41BD1577D009D6E6D /* HiganGameCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D38817A9445800BC796A /* HiganGameCore.mm */; };
@@ -93,7 +92,7 @@
 		8CAD01EC1BD1577D009D6E6D /* sharprtc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2AA17A9445800BC796A /* sharprtc.cpp */; };
 		8CAD01ED1BD1577D009D6E6D /* spc7110.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2B317A9445800BC796A /* spc7110.cpp */; };
 		8CAD01EE1BD1577D009D6E6D /* superfx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2C617A9445800BC796A /* superfx.cpp */; };
-		8CAD01EF1BD1577D009D6E6D /* mcc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50461BC872060099D506 /* mcc.cpp */; settings = {ASSET_TAGS = (); }; };
+		8CAD01EF1BD1577D009D6E6D /* mcc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50461BC872060099D506 /* mcc.cpp */; };
 		8CAD01F01BD1577D009D6E6D /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF4217A9445600BC796A /* cpu.cpp */; };
 		8CAD01F11BD1577D009D6E6D /* cheat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D25717A9445700BC796A /* cheat.cpp */; };
 		8CAD01F51BD1577D009D6E6D /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF9F17A9445600BC796A /* system.cpp */; };
@@ -111,7 +110,7 @@
 		8CAD02011BD1577D009D6E6D /* cheat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEED17A9445600BC796A /* cheat.cpp */; };
 		8CAD02021BD1577D009D6E6D /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEF017A9445600BC796A /* cpu.cpp */; };
 		8CAD02031BD1577D009D6E6D /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEF617A9445600BC796A /* input.cpp */; };
-		8CAD02041BD1577D009D6E6D /* serialization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50481BC872060099D506 /* serialization.cpp */; settings = {ASSET_TAGS = (); }; };
+		8CAD02041BD1577D009D6E6D /* serialization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50481BC872060099D506 /* serialization.cpp */; };
 		8CAD02051BD1577D009D6E6D /* interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEFA17A9445600BC796A /* interface.cpp */; };
 		8CAD02061BD1577D009D6E6D /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEFE17A9445600BC796A /* memory.cpp */; };
 		8CAD02071BD1577D009D6E6D /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF0117A9445600BC796A /* ppu.cpp */; };
@@ -126,7 +125,6 @@
 		8CAD02121BD1577D009D6E6D /* Game Boy Advance.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CD17B2760200B3117C /* Game Boy Advance.sys */; };
 		8CAD02131BD1577D009D6E6D /* Game Boy.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CF17B2760200B3117C /* Game Boy.sys */; };
 		8CAD02141BD1577D009D6E6D /* Game Boy Color.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */; };
-		8CAD02151BD1577D009D6E6D /* GNUmakefile in Resources */ = {isa = PBXBuildFile; fileRef = 8C1B4C8B1BC86FF80099D506 /* GNUmakefile */; settings = {ASSET_TAGS = (); }; };
 		8CAD02161BD1577D009D6E6D /* Famicom.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CC17B2760200B3117C /* Famicom.sys */; };
 		8CAD021E1BD157B2009D6E6D /* HiganGameCore.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D38817A9445800BC796A /* HiganGameCore.mm */; };
 		8CAD021F1BD157B2009D6E6D /* HiganInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D38917A9445800BC796A /* HiganInterface.mm */; };
@@ -170,7 +168,7 @@
 		8CAD02461BD157B2009D6E6D /* sharprtc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2AA17A9445800BC796A /* sharprtc.cpp */; };
 		8CAD02471BD157B2009D6E6D /* spc7110.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2B317A9445800BC796A /* spc7110.cpp */; };
 		8CAD02481BD157B2009D6E6D /* superfx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2C617A9445800BC796A /* superfx.cpp */; };
-		8CAD02491BD157B2009D6E6D /* mcc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50461BC872060099D506 /* mcc.cpp */; settings = {ASSET_TAGS = (); }; };
+		8CAD02491BD157B2009D6E6D /* mcc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50461BC872060099D506 /* mcc.cpp */; };
 		8CAD024A1BD157B2009D6E6D /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF4217A9445600BC796A /* cpu.cpp */; };
 		8CAD024B1BD157B2009D6E6D /* cheat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D25717A9445700BC796A /* cheat.cpp */; };
 		8CAD024F1BD157B2009D6E6D /* system.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF9F17A9445600BC796A /* system.cpp */; };
@@ -188,7 +186,7 @@
 		8CAD025B1BD157B2009D6E6D /* cheat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEED17A9445600BC796A /* cheat.cpp */; };
 		8CAD025C1BD157B2009D6E6D /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEF017A9445600BC796A /* cpu.cpp */; };
 		8CAD025D1BD157B2009D6E6D /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEF617A9445600BC796A /* input.cpp */; };
-		8CAD025E1BD157B2009D6E6D /* serialization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50481BC872060099D506 /* serialization.cpp */; settings = {ASSET_TAGS = (); }; };
+		8CAD025E1BD157B2009D6E6D /* serialization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8C1B50481BC872060099D506 /* serialization.cpp */; };
 		8CAD025F1BD157B2009D6E6D /* interface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEFA17A9445600BC796A /* interface.cpp */; };
 		8CAD02601BD157B2009D6E6D /* memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CEFE17A9445600BC796A /* memory.cpp */; };
 		8CAD02611BD157B2009D6E6D /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8CF0117A9445600BC796A /* ppu.cpp */; };
@@ -203,16 +201,15 @@
 		8CAD026C1BD157B2009D6E6D /* Game Boy Advance.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CD17B2760200B3117C /* Game Boy Advance.sys */; };
 		8CAD026D1BD157B2009D6E6D /* Game Boy.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CF17B2760200B3117C /* Game Boy.sys */; };
 		8CAD026E1BD157B2009D6E6D /* Game Boy Color.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */; };
-		8CAD026F1BD157B2009D6E6D /* GNUmakefile in Resources */ = {isa = PBXBuildFile; fileRef = 8C1B4C8B1BC86FF80099D506 /* GNUmakefile */; settings = {ASSET_TAGS = (); }; };
 		8CAD02701BD157B2009D6E6D /* Famicom.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CC17B2760200B3117C /* Famicom.sys */; };
-		8CAD02841BD1590B009D6E6D /* dsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D20217A9445700BC796A /* dsp.cpp */; settings = {ASSET_TAGS = (); }; };
-		8CAD02851BD1593F009D6E6D /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D20E17A9445700BC796A /* ppu.cpp */; settings = {ASSET_TAGS = (); }; };
-		8CAD02861BD15951009D6E6D /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D31417A9445800BC796A /* ppu.cpp */; settings = {ASSET_TAGS = (); }; };
-		8CAD02871BD1595E009D6E6D /* dsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2F817A9445800BC796A /* dsp.cpp */; settings = {ASSET_TAGS = (); }; };
-		8CAD02881BD1597F009D6E6D /* smp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D33717A9445800BC796A /* smp.cpp */; settings = {ASSET_TAGS = (); }; };
-		8CAD02891BD15980009D6E6D /* smp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D33717A9445800BC796A /* smp.cpp */; settings = {ASSET_TAGS = (); }; };
-		8CAD028A1BD1598E009D6E6D /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2E417A9445800BC796A /* cpu.cpp */; settings = {ASSET_TAGS = (); }; };
-		8CAD028B1BD1598E009D6E6D /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2E417A9445800BC796A /* cpu.cpp */; settings = {ASSET_TAGS = (); }; };
+		8CAD02841BD1590B009D6E6D /* dsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D20217A9445700BC796A /* dsp.cpp */; };
+		8CAD02851BD1593F009D6E6D /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D20E17A9445700BC796A /* ppu.cpp */; };
+		8CAD02861BD15951009D6E6D /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D31417A9445800BC796A /* ppu.cpp */; };
+		8CAD02871BD1595E009D6E6D /* dsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2F817A9445800BC796A /* dsp.cpp */; };
+		8CAD02881BD1597F009D6E6D /* smp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D33717A9445800BC796A /* smp.cpp */; };
+		8CAD02891BD15980009D6E6D /* smp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D33717A9445800BC796A /* smp.cpp */; };
+		8CAD028A1BD1598E009D6E6D /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2E417A9445800BC796A /* cpu.cpp */; };
+		8CAD028B1BD1598E009D6E6D /* cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8D2E417A9445800BC796A /* cpu.cpp */; };
 		8CB3C3E817DB65B400F9A971 /* HiganImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3C3E717DB65B400F9A971 /* HiganImporter.mm */; };
 		8CB5AC5F17C362CD00EB28E7 /* Game Boy.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CF17B2760200B3117C /* Game Boy.sys */; };
 		8CB5AC6017C362CF00EB28E7 /* Game Boy Color.sys in Resources */ = {isa = PBXBuildFile; fileRef = 8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */; };
@@ -5179,7 +5176,6 @@
 				8CB7C5D217B2760900B3117C /* Game Boy Advance.sys in Resources */,
 				8CB5AC5F17C362CD00EB28E7 /* Game Boy.sys in Resources */,
 				8CB5AC6017C362CF00EB28E7 /* Game Boy Color.sys in Resources */,
-				8C1B4D071BC86FF80099D506 /* GNUmakefile in Resources */,
 				8CB5AC6117C362D300EB28E7 /* Famicom.sys in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5193,7 +5189,6 @@
 				8CAD02121BD1577D009D6E6D /* Game Boy Advance.sys in Resources */,
 				8CAD02131BD1577D009D6E6D /* Game Boy.sys in Resources */,
 				8CAD02141BD1577D009D6E6D /* Game Boy Color.sys in Resources */,
-				8CAD02151BD1577D009D6E6D /* GNUmakefile in Resources */,
 				8CAD02161BD1577D009D6E6D /* Famicom.sys in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5207,7 +5202,6 @@
 				8CAD026C1BD157B2009D6E6D /* Game Boy Advance.sys in Resources */,
 				8CAD026D1BD157B2009D6E6D /* Game Boy.sys in Resources */,
 				8CAD026E1BD157B2009D6E6D /* Game Boy Color.sys in Resources */,
-				8CAD026F1BD157B2009D6E6D /* GNUmakefile in Resources */,
 				8CAD02701BD157B2009D6E6D /* Famicom.sys in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5252,7 +5246,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir -p \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores\"\nrm -rf \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores/$PROJECT_NAME.oecoreplugin\"{,.dSYM}\ncp -rf \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.oecoreplugin\"{,.dSYM} \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores/\"\n";
+			shellScript = "mkdir -p \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores\"\nrm -rf \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores/Higan (Performance).oecoreplugin\"{,.dSYM}\ncp -rf \"$BUILT_PRODUCTS_DIR/Higan (Performance).oecoreplugin\"{,.dSYM} \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -5534,9 +5528,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5546,7 +5540,8 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/higan\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DPROFILE_PERFORMANCE";
 				SDKROOT = macosx;
@@ -5560,15 +5555,16 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/higan\"";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = (
 					"-DPROFILE_PERFORMANCE",
 					"-march=native",
