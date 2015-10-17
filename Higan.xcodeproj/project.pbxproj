@@ -1245,15 +1245,15 @@
 		8C1B50461BC872060099D506 /* mcc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mcc.cpp; sourceTree = "<group>"; };
 		8C1B50471BC872060099D506 /* mcc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mcc.hpp; sourceTree = "<group>"; };
 		8C1B50481BC872060099D506 /* serialization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = serialization.cpp; sourceTree = "<group>"; };
-		8CA9071B17A84F72001591B7 /* Higan (Performance).oecoreplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Higan (Performance).oecoreplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CA9071B17A84F72001591B7 /* Higan.oecoreplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Higan.oecoreplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA9071E17A84F72001591B7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8CA9072117A84F72001591B7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		8CA9072217A84F72001591B7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8CA9072317A84F72001591B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8CA9072617A84F72001591B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8CA9072817A84F72001591B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8CAD021A1BD1577D009D6E6D /* Higan (Balanced).oecoreplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Higan (Balanced).oecoreplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CAD02741BD157B2009D6E6D /* Higan (Accuracy).oecoreplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Higan (Accuracy).oecoreplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CAD021A1BD1577D009D6E6D /* Higan.oecoreplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Higan.oecoreplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CAD02741BD157B2009D6E6D /* Higan.oecoreplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Higan.oecoreplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB3C3E617DB65B400F9A971 /* HiganImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiganImporter.h; sourceTree = "<group>"; };
 		8CB3C3E717DB65B400F9A971 /* HiganImporter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HiganImporter.mm; sourceTree = "<group>"; };
 		8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBSystemResponderClient.h; path = ../OpenEmu/GameBoy/OEGBSystemResponderClient.h; sourceTree = "<group>"; };
@@ -3397,9 +3397,9 @@
 		8CA9071C17A84F72001591B7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8CA9071B17A84F72001591B7 /* Higan (Performance).oecoreplugin */,
-				8CAD021A1BD1577D009D6E6D /* Higan (Balanced).oecoreplugin */,
-				8CAD02741BD157B2009D6E6D /* Higan (Accuracy).oecoreplugin */,
+				8CA9071B17A84F72001591B7 /* Higan.oecoreplugin */,
+				8CAD021A1BD1577D009D6E6D /* Higan.oecoreplugin */,
+				8CAD02741BD157B2009D6E6D /* Higan.oecoreplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5098,7 +5098,7 @@
 			);
 			name = "Higan (Performance)";
 			productName = Higan;
-			productReference = 8CA9071B17A84F72001591B7 /* Higan (Performance).oecoreplugin */;
+			productReference = 8CA9071B17A84F72001591B7 /* Higan.oecoreplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 		8CAD01C21BD1577D009D6E6D /* Higan (Balanced) */ = {
@@ -5115,7 +5115,7 @@
 			);
 			name = "Higan (Balanced)";
 			productName = Higan;
-			productReference = 8CAD021A1BD1577D009D6E6D /* Higan (Balanced).oecoreplugin */;
+			productReference = 8CAD021A1BD1577D009D6E6D /* Higan.oecoreplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 		8CAD021C1BD157B2009D6E6D /* Higan (Accuracy) */ = {
@@ -5132,7 +5132,7 @@
 			);
 			name = "Higan (Accuracy)";
 			productName = Higan;
-			productReference = 8CAD02741BD157B2009D6E6D /* Higan (Accuracy).oecoreplugin */;
+			productReference = 8CAD02741BD157B2009D6E6D /* Higan.oecoreplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -5246,7 +5246,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir -p \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores\"\nrm -rf \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores/Higan (Performance).oecoreplugin\"{,.dSYM}\ncp -rf \"$BUILT_PRODUCTS_DIR/Higan (Performance).oecoreplugin\"{,.dSYM} \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores/\"\n";
+			shellScript = "mkdir -p \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores\"\nrm -rf \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores/$PROJECT_NAME.oecoreplugin\"{,.dSYM}\ncp -rf \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.oecoreplugin\"{,.dSYM} \"$USER_LIBRARY_DIR/Application Support/OpenEmu/Cores/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -5585,7 +5585,7 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openemu.${PRODUCT_NAME:identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Higan;
 				WRAPPER_EXTENSION = oecoreplugin;
 			};
 			name = Debug;
@@ -5601,7 +5601,7 @@
 				);
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openemu.${PRODUCT_NAME:identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Higan;
 				WRAPPER_EXTENSION = oecoreplugin;
 			};
 			name = Release;
@@ -5618,7 +5618,7 @@
 				INFOPLIST_FILE = Info.plist;
 				OTHER_CFLAGS = "-DPROFILE_BALANCED";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openemu.${PRODUCT_NAME:identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Higan;
 				WRAPPER_EXTENSION = oecoreplugin;
 			};
 			name = Debug;
@@ -5639,7 +5639,7 @@
 					"-fomit-frame-pointer",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openemu.${PRODUCT_NAME:identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Higan;
 				WRAPPER_EXTENSION = oecoreplugin;
 			};
 			name = Release;
@@ -5656,7 +5656,7 @@
 				INFOPLIST_FILE = Info.plist;
 				OTHER_CFLAGS = "-DPROFILE_ACCURACY";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openemu.${PRODUCT_NAME:identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Higan;
 				WRAPPER_EXTENSION = oecoreplugin;
 			};
 			name = Debug;
@@ -5677,7 +5677,7 @@
 					"-fomit-frame-pointer",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openemu.${PRODUCT_NAME:identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Higan;
 				WRAPPER_EXTENSION = oecoreplugin;
 			};
 			name = Release;
