@@ -146,16 +146,10 @@
 
 - (void)executeFrame
 {
-    [self executeFrameSkippingFrame:NO];
-}
-
-- (void)executeFrameSkippingFrame:(BOOL)skip
-{
     _interface->run();
 
     signed samples[2];
-    while(_interface->resampler.pending())
-    {
+    while(_interface->resampler.pending()) {
         _interface->resampler.read(samples);
         [[self ringBufferAtIndex:0] write:&samples[0] maxLength:2];
         [[self ringBufferAtIndex:0] write:&samples[1] maxLength:2];
@@ -252,20 +246,16 @@
     unsigned int stateLength = [state length];
     serializer stateToLoad(stateBytes, stateLength);
     
-    if(!_interface->active->unserialize(stateToLoad))
-    {
-        NSError *error = [NSError errorWithDomain:OEGameCoreErrorDomain
-                                             code:OEGameCoreCouldNotLoadStateError
-                                         userInfo:@{
-                                                    NSLocalizedDescriptionKey : @"The save state data could not be read"
-                                                    }];
-        if(outError)
-        {
-            *outError = error;
-        }
-        return NO;
+    if(_interface->active->unserialize(stateToLoad))
+        return YES;
+
+    if (outError) {
+        *outError = [NSError errorWithDomain:OEGameCoreErrorDomain code:OEGameCoreCouldNotLoadStateError userInfo:@{
+            NSLocalizedDescriptionKey : @"The save state data could not be read"
+        }];
     }
-    return YES;
+
+    return NO;
 }
 
 - (void)saveStateToFileAtPath:(NSString *)fileName completionHandler:(void (^)(BOOL, NSError *))block
