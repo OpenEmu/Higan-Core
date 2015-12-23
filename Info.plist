@@ -168,7 +168,7 @@
 	<key>OEGameCorePlayerCount</key>
 	<string>2</string>
 	<key>OEProjectURL</key>
-	<string>http://byuu.org/higan/</string>
+	<string>http://byuu.org</string>
 	<key>OESystemIdentifiers</key>
 	<array>
 		<string>openemu.system.snes</string>
