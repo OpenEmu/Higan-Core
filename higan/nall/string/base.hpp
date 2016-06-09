@@ -43,7 +43,7 @@ inline auto pathname(rstring self) -> string;
 inline auto filename(rstring self) -> string;
 
 inline auto dirname(rstring self) -> string;
-inline auto basename(rstring self) -> string;
+inline auto basename(string self) -> string;
 inline auto prefixname(rstring self) -> string;
 inline auto suffixname(rstring self) -> string;
 
