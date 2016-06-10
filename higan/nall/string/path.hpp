@@ -33,16 +33,15 @@ auto dirname(rstring self) -> string {
   return self.data();  //this is the root directory
 }
 
-// "/foo/bar.c" -> "/foo/bar"
-auto basename(string name) -> string {
-    for(signed i = name.length(); i >= 0; i--) {
-        if(name[i] == '/' || name[i] == '\\') break;  //file has no extension
-        if(name[i] == '.') {
-            name.resize(i);
-            break;
-        }
-    }
-    return name;
+// /parent/(child.type/)
+// /parent/child.type/(name.type)
+auto basename(rstring self) -> string {
+  const char* p = self.data() + self.size() - 1, *last = p;
+  for(signed offset = self.size() - 1; offset >= 0; offset--, p--) {
+    if(*p == '/' && p == last) continue;
+    if(*p == '/') return slice(self, offset + 1);
+  }
+  return "";
 }
 
 // /parent/(child).type/

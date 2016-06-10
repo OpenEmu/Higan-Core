@@ -85,10 +85,10 @@ void importSuperFamicom(string path, string biosPath, vector<uint8_t> buffer)
     ^(const string &name, unsigned programSize, unsigned dataSize, unsigned bootSize)
     {
         //firmware appended directly onto .sfc file
-        string basename = nall::basename(name);
-        if(programSize) file::write({path, basename, ".program.rom"}, buffer.data() + buffer.size() - programSize - dataSize - bootSize, programSize);
-        if(dataSize) file::write({path, basename, ".data.rom"}, buffer.data() + buffer.size() - dataSize - bootSize, dataSize);
-        if(bootSize) file::write({path, basename, ".boot.rom"}, buffer.data() + buffer.size() - bootSize, bootSize);
+        string prefixname = nall::prefixname(name);
+        if(programSize) file::write({path, prefixname, ".program.rom"}, buffer.data() + buffer.size() - programSize - dataSize - bootSize, programSize);
+        if(dataSize) file::write({path, prefixname, ".data.rom"}, buffer.data() + buffer.size() - dataSize - bootSize, dataSize);
+        if(bootSize) file::write({path, prefixname, ".boot.rom"}, buffer.data() + buffer.size() - bootSize, bootSize);
     };
 
     void (^copyFirmwareExternal)(const string &, unsigned, unsigned, unsigned) =
@@ -101,10 +101,10 @@ void importSuperFamicom(string path, string biosPath, vector<uint8_t> buffer)
             return;
         }
         auto buffer = file::read({biosPath, "/", name});
-        string basename = nall::basename(name);
-        if(programSize) file::write({path, basename, ".program.rom"}, buffer.data(), programSize);
-        if(dataSize) file::write({path, basename, ".data.rom"}, buffer.data() + programSize, dataSize);
-        if(bootSize) file::write({path, basename, ".boot.rom"}, buffer.data() + programSize + dataSize, bootSize);
+        string prefixname = nall::prefixname(name);
+        if(programSize) file::write({path, prefixname, ".program.rom"}, buffer.data(), programSize);
+        if(dataSize) file::write({path, prefixname, ".data.rom"}, buffer.data() + programSize, dataSize);
+        if(bootSize) file::write({path, prefixname, ".boot.rom"}, buffer.data() + programSize + dataSize, bootSize);
     };
 
     void (^copyFirmware)(const string &, unsigned, unsigned, unsigned) =
