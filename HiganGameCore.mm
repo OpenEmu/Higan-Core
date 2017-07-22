@@ -195,9 +195,12 @@
     return OEIntSizeMake(512, 480);
 }
 
-- (const void *)videoBuffer
+- (const void *)getVideoBufferWithHint:(void *)hint
 {
-    return _interface->videoBuffer;
+    if (!hint) {
+        return _interface->videoBuffer;
+    }
+    return _interface->videoBuffer = (uint32_t*)hint;
 }
 
 - (GLenum)pixelFormat
@@ -208,11 +211,6 @@
 - (GLenum)pixelType
 {
     return GL_UNSIGNED_INT_8_8_8_8_REV;
-}
-
-- (GLenum)internalPixelFormat
-{
-    return GL_RGB8;
 }
 
 - (NSTimeInterval)frameInterval
