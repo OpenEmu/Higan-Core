@@ -3393,6 +3393,7 @@
 				8CA9071C17A84F72001591B7 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		8CA9071C17A84F72001591B7 /* Products */ = {
 			isa = PBXGroup;
