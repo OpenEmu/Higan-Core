@@ -56,12 +56,12 @@
 {
     _interface = new Interface;
 
-    _interface->bundlePath  = [[[[self owner] bundle] resourcePath] UTF8String];
-    _interface->supportPath = [[self supportDirectoryPath] UTF8String];
+    _interface->bundlePath  = [[[[self owner] bundle] resourcePath] fileSystemRepresentation];
+    _interface->supportPath = [[self supportDirectoryPath] fileSystemRepresentation];
 
-    vector<uint8_t> buffer  = file::read([path UTF8String]);
-    string romName          = [[path lastPathComponent] UTF8String];
-    string biosPath         = [[self biosDirectoryPath] UTF8String];
+    vector<uint8_t> buffer  = file::read(path.fileSystemRepresentation);
+    string romName          = path.lastPathComponent.fileSystemRepresentation;
+    string biosPath         = [[self biosDirectoryPath] fileSystemRepresentation];
 
     if([[self systemIdentifier] isEqualToString:@"openemu.system.snes"])
     {
