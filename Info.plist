@@ -159,5 +159,16 @@
 	<string>1</string>
 	<key>SUFeedURL</key>
 	<string>https://raw.github.com/OpenEmu/OpenEmu-Update/master/higan_appcast.xml</string>
+	<key>OEDeprecated</key>
+	<true/>
+	<key>OEDeprecatedMinMacOSVersion</key>
+	<string>10.14</string>
+	<key>OESuggestedReplacementCore</key>
+	<dict>
+		<key>openemu.system.snes</key>
+		<string>org.openemu.BSNES</string>
+	</dict>
+	<key>OESupportDeadline</key>
+	<date>2020-06-01T00:00:00Z</date>
 </dict>
 </plist>
