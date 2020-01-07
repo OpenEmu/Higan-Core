@@ -1251,7 +1251,7 @@
 		8CA9072217A84F72001591B7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8CA9072317A84F72001591B7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8CA9072617A84F72001591B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
-		8CA9072817A84F72001591B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8CA9072817A84F72001591B7 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8CAD021A1BD1577D009D6E6D /* Higan.oecoreplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Higan.oecoreplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CAD02741BD157B2009D6E6D /* Higan.oecoreplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Higan.oecoreplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB3C3E617DB65B400F9A971 /* HiganImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiganImporter.h; sourceTree = "<group>"; };
@@ -1779,7 +1779,7 @@
 		8CC8D38817A9445800BC796A /* HiganGameCore.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HiganGameCore.mm; sourceTree = "<group>"; };
 		8CC8D38917A9445800BC796A /* HiganInterface.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HiganInterface.mm; sourceTree = "<group>"; };
 		8CC8D3C117A949F900BC796A /* OESNESSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OESNESSystemResponderClient.h; path = ../OpenEmu/SuperNES/OESNESSystemResponderClient.h; sourceTree = "<group>"; };
-		8CC8D3C417A94C2700BC796A /* OpenEmuBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenEmuBase.framework; path = ../Build/Products/Debug/OpenEmuBase.framework; sourceTree = "<group>"; };
+		8CC8D3C417A94C2700BC796A /* OpenEmuBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenEmuBase.framework; path = OpenEmuBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC9999918C2A9D000792C9B /* player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
 		8CC9999A18C2A9D000792C9B /* player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
 		8CC9999B18C2A9D000792C9B /* serialization.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = serialization.cpp; sourceTree = "<group>"; };
@@ -5147,7 +5147,7 @@
 			};
 			buildConfigurationList = 8CA9071617A84F72001591B7 /* Build configuration list for PBXProject "Higan" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
