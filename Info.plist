@@ -15,9 +15,13 @@
 	<key>CFBundleSignature</key>
 	<string>OpEm</string>
 	<key>CFBundleVersion</key>
-	<string>0.95.1</string>
+	<string>0.95.2</string>
 	<key>NSPrincipalClass</key>
 	<string>OEGameCoreController</string>
+	<key>OEDeprecated</key>
+	<true/>
+	<key>OEDeprecatedMinMacOSVersion</key>
+	<string>10.14</string>
 	<key>OEGameCoreClass</key>
 	<string>HiganGameCore</string>
 	<key>OEGameCoreOptions</key>
@@ -151,6 +155,13 @@
 	<string>2</string>
 	<key>OEProjectURL</key>
 	<string>http://byuu.org</string>
+	<key>OESuggestedReplacementCore</key>
+	<dict>
+		<key>openemu.system.snes</key>
+		<string>org.openemu.BSNES</string>
+	</dict>
+	<key>OESupportDeadline</key>
+	<date>2020-06-01T00:00:00Z</date>
 	<key>OESystemIdentifiers</key>
 	<array>
 		<string>openemu.system.snes</string>
@@ -159,16 +170,5 @@
 	<string>1</string>
 	<key>SUFeedURL</key>
 	<string>https://raw.github.com/OpenEmu/OpenEmu-Update/master/higan_appcast.xml</string>
-	<key>OEDeprecated</key>
-	<true/>
-	<key>OEDeprecatedMinMacOSVersion</key>
-	<string>10.14</string>
-	<key>OESuggestedReplacementCore</key>
-	<dict>
-		<key>openemu.system.snes</key>
-		<string>org.openemu.BSNES</string>
-	</dict>
-	<key>OESupportDeadline</key>
-	<date>2020-06-01T00:00:00Z</date>
 </dict>
 </plist>
