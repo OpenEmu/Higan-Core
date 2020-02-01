@@ -5568,7 +5568,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_CFLAGS = (
 					"-DPROFILE_PERFORMANCE",
-					"-march=native",
 					"-fomit-frame-pointer",
 				);
 				SDKROOT = macosx;
@@ -5636,7 +5635,6 @@
 				INFOPLIST_FILE = Info.plist;
 				OTHER_CFLAGS = (
 					"-DPROFILE_BALANCED",
-					"-march=native",
 					"-fomit-frame-pointer",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openemu.${PRODUCT_NAME:identifier}";
@@ -5674,7 +5672,6 @@
 				INFOPLIST_FILE = Info.plist;
 				OTHER_CFLAGS = (
 					"-DPROFILE_ACCURACY",
-					"-march=native",
 					"-fomit-frame-pointer",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.openemu.${PRODUCT_NAME:identifier}";
