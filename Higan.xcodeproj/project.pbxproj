@@ -1256,14 +1256,14 @@
 		8CAD02741BD157B2009D6E6D /* Higan.oecoreplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Higan.oecoreplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB3C3E617DB65B400F9A971 /* HiganImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HiganImporter.h; sourceTree = "<group>"; };
 		8CB3C3E717DB65B400F9A971 /* HiganImporter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HiganImporter.mm; sourceTree = "<group>"; };
-		8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBSystemResponderClient.h; path = ../OpenEmu/GameBoy/OEGBSystemResponderClient.h; sourceTree = "<group>"; };
-		8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBASystemResponderClient.h; path = "../OpenEmu/GameBoy Advance/OEGBASystemResponderClient.h"; sourceTree = "<group>"; };
+		8CB5AC5E17C352B400EB28E7 /* OEGBSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBSystemResponderClient.h; path = ../OpenEmu/SystemPlugins/GameBoy/OEGBSystemResponderClient.h; sourceTree = "<group>"; };
+		8CB7C5C417B2744000B3117C /* OEGBASystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OEGBASystemResponderClient.h; path = "../OpenEmu/SystemPlugins/GameBoy Advance/OEGBASystemResponderClient.h"; sourceTree = "<group>"; };
 		8CB7C5CC17B2760200B3117C /* Famicom.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Famicom.sys; sourceTree = "<group>"; };
 		8CB7C5CD17B2760200B3117C /* Game Boy Advance.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy Advance.sys"; sourceTree = "<group>"; };
 		8CB7C5CE17B2760200B3117C /* Game Boy Color.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy Color.sys"; sourceTree = "<group>"; };
 		8CB7C5CF17B2760200B3117C /* Game Boy.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Game Boy.sys"; sourceTree = "<group>"; };
 		8CB7C5D017B2760200B3117C /* Super Famicom.sys */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Super Famicom.sys"; sourceTree = "<group>"; };
-		8CC100DF17CD4C3D0086A9CD /* OENESSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OENESSystemResponderClient.h; path = ../OpenEmu/NES/OENESSystemResponderClient.h; sourceTree = "<group>"; };
+		8CC100DF17CD4C3D0086A9CD /* OENESSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OENESSystemResponderClient.h; path = ../OpenEmu/SystemPlugins/NES/OENESSystemResponderClient.h; sourceTree = "<group>"; };
 		8CC8CEB017A9445600BC796A /* emulator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = emulator.hpp; sourceTree = "<group>"; };
 		8CC8CEB117A9445600BC796A /* interface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = interface.hpp; sourceTree = "<group>"; };
 		8CC8CEB617A9445600BC796A /* apu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = apu.cpp; sourceTree = "<group>"; };
@@ -1778,7 +1778,7 @@
 		8CC8D38717A9445800BC796A /* HiganInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiganInterface.h; sourceTree = "<group>"; };
 		8CC8D38817A9445800BC796A /* HiganGameCore.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HiganGameCore.mm; sourceTree = "<group>"; };
 		8CC8D38917A9445800BC796A /* HiganInterface.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HiganInterface.mm; sourceTree = "<group>"; };
-		8CC8D3C117A949F900BC796A /* OESNESSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OESNESSystemResponderClient.h; path = ../OpenEmu/SuperNES/OESNESSystemResponderClient.h; sourceTree = "<group>"; };
+		8CC8D3C117A949F900BC796A /* OESNESSystemResponderClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OESNESSystemResponderClient.h; path = ../OpenEmu/SystemPlugins/SuperNES/OESNESSystemResponderClient.h; sourceTree = "<group>"; };
 		8CC8D3C417A94C2700BC796A /* OpenEmuBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenEmuBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC9999918C2A9D000792C9B /* player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = player.cpp; sourceTree = "<group>"; };
 		8CC9999A18C2A9D000792C9B /* player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = player.hpp; sourceTree = "<group>"; };
