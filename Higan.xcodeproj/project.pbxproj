@@ -313,6 +313,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		552EA74325E455E200879856 /* aarch64.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = aarch64.c; sourceTree = "<group>"; };
+		552EA74425E455E200879856 /* ppc64v2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ppc64v2.c; sourceTree = "<group>"; };
+		552EA74525E455E200879856 /* arm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = arm.c; sourceTree = "<group>"; };
+		552EA74625E455E200879856 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		552EA74825E455E200879856 /* usage.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = usage.md; sourceTree = "<group>"; };
+		552EA74925E455E200879856 /* targets.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = targets.md; sourceTree = "<group>"; };
+		552EA74A25E455E300879856 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		552EA75125E4561A00879856 /* settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
 		8C1B4C551BC86FF80099D506 /* algorithm.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = algorithm.hpp; sourceTree = "<group>"; };
 		8C1B4C561BC86FF80099D506 /* any.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = any.hpp; sourceTree = "<group>"; };
 		8C1B4C571BC86FF80099D506 /* atoi.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = atoi.hpp; sourceTree = "<group>"; };
@@ -1818,6 +1826,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		552EA74725E455E200879856 /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				552EA74925E455E200879856 /* targets.md */,
+				552EA74825E455E200879856 /* usage.md */,
+			);
+			path = doc;
+			sourceTree = "<group>";
+		};
 		8C1B4C541BC86FF80099D506 /* nall */ = {
 			isa = PBXGroup;
 			children = (
@@ -4056,11 +4073,18 @@
 		8CC8CFA517A9445600BC796A /* libco */ = {
 			isa = PBXGroup;
 			children = (
+				552EA74325E455E200879856 /* aarch64.c */,
 				8CC8CFA617A9445600BC796A /* amd64.c */,
+				552EA74525E455E200879856 /* arm.c */,
+				552EA74725E455E200879856 /* doc */,
 				8CC8CFA717A9445600BC796A /* fiber.c */,
 				8CC8CFA817A9445600BC796A /* libco.c */,
 				8CC8CFA917A9445600BC796A /* libco.h */,
+				552EA74625E455E200879856 /* LICENSE */,
 				8CC8CFAA17A9445600BC796A /* ppc.c */,
+				552EA74425E455E200879856 /* ppc64v2.c */,
+				552EA74A25E455E300879856 /* README.md */,
+				552EA75125E4561A00879856 /* settings.h */,
 				8CC8CFAB17A9445600BC796A /* sjlj.c */,
 				8CC8CFAC17A9445600BC796A /* ucontext.c */,
 				8CC8CFAD17A9445600BC796A /* x86.c */,
